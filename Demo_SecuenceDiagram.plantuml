@@ -9,26 +9,28 @@
 	    participant external_node
     end box
     
-    position_sensor ->  actuator: Altura (1200 m)
-    position_sensor ->  actuator: Altura (1150 m)
-    position_sensor ->  actuator: Altura (1075 m)
+    position_sensor ->  actuator: Altitude: 1200 m
+    position_sensor ->  actuator: Altitude: 1150 m
+    position_sensor ->  actuator: Altitude: 1075 m
     ...
-    position_sensor ->  actuator: Altura (920 m)
+    position_sensor ->  actuator: Altitude: 920 m
     actuator -> display : warning!!
     actuator -> external_node: warning!!
+    external_node -> actuator: Engine power: +5 Watt
     
-    position_sensor ->  actuator: Altura (499 m)
+    position_sensor ->  actuator: Altitude: 499 m
     actuator -> display : Failure!!
     actuator -> external_node: Failure!!
-    external_node -> actuator: +10 W
+    external_node -> actuator: Engine power: +10 Watt
 
-    position_sensor ->  actuator: Altura (999 m)
+    position_sensor ->  actuator: Altitude: 999 m
     actuator -> display : warning!!
     actuator -> external_node: warning!!
+    external_node -> actuator: Engine power: +5 Watt
 
     ...
-    position_sensor ->  actuator: Altura (1001 m)
-    position_sensor ->  actuator: Altura (1010 m)
-    position_sensor ->  actuator: Altura (1500 m)
+    position_sensor ->  actuator: Altitude: 1001 m
+    position_sensor ->  actuator: Altitude: 1010 m
+    position_sensor ->  actuator: Altitude: 1500 m
     ...    
 @enduml
