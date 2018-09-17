@@ -103,10 +103,18 @@ repositories:
     type: git
     url: https://github.com/eProsima/micro-RTPS-client.git
     version: feature/reference
+  eProsima/micrortps-agent:
+    type: git
+    url: https://github.com/eProsima/micro-RTPS-agent
+    version: develop
   eProsima/fastrtps:
     type: git
     url: https://github.com/eProsima/Fast-RTPS.git
-    version: feature/attributes
+    version: v1.6.0
+  eProsima/fast-CDR:
+    type: git
+    url: https://github.com/eProsima/Fast-CDR.git
+    version: v1.0.7
   microROS/rmw_micrortps:
     type: git
     url: https://gitlab.intranet.eprosima.com/eProsima/rmw_micrortps.git
