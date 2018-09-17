@@ -16,7 +16,7 @@ Below are two ways to set-up a working environment for ROS2.
 
 The easiest option is to run a Docker container with all needed tools. Using Docker containers is preferred to the second option due to the isolation provided by Docker containers to your micro-ROS environment from the local operating system, so our host operating system and tools won't interfere with the micro-ROS compilation processes.
 
-For this step is necessary to have Docker engine installed on the host computer. The oficial [tutorial](https://runnable.com/docker/install-docker-on-linux) can help you installing and setting-up Docker. Also, if you want to know more about Dockers technology you can visit the [web page](https://docs.docker.com/).
+For this step is necessary to have Docker engine installed on the host computer. The official [tutorial](https://runnable.com/docker/install-docker-on-linux) can help you installing and setting-up Docker. Also, if you want to know more about Dockers technology you can visit the [web page](https://docs.docker.com/).
 
 To run the docker environment, you have to execute the next bash line.
 
