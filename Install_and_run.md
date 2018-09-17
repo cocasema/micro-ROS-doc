@@ -16,18 +16,32 @@ For this step is necessary to have the docker virtualization software installed 
 
 One you have the docker installed you can execute this bash line to download the needed docker image.
 ```console
-$docker pull boouga/bouncy_ros2_build_sources
+$docker pull boouga/bouncy_ros2_build_sources IMAGE_NAME
 ```
+This will download one docker image that will contains all required tools. The image will be named as "IMAGE_NAME". In case you don't set the image name value, it will be named as the remote pulled image is. 
 
-To run the docker environment you have to execute the next bash line.
+
+To run the docker image you have to execute the next bash line.
 ```console
 $docker run -it --privileged --mount type=bind,source="WORKSPACE_PATH",target="/root/ros2_ws/" --net=host microros
 ```
 
+Note: The "--mount type=bind,source="WORKSPACE_PATH",target="/root/ros2_ws/" argument will link your local directory WORKSPACE_PATH to the '/root/ros2_ws/' placed in the running docker container.  This means, all changes you make inside this directory will take place in you local directory.
+
 
 ## Installing ros2 environment into host operation system
 
-For this option you have a full documented tutorial [here](https://github.com/ros2/ros2/wiki/Installation)
+For this option you will need to install in your host:
+
+- Ros2: This is needed for build, run and manage ros2 packages. The installation is full documented in this [link](https://github.com/ros2/ros2/wiki/Installation).
+
+- pip: This is a package manager needed to intall the VCS import tool. The installation if full documente in this [link](https://pip.pypa.io/en/stable/installing/)
+
+- VSC import: This tool is requiered for the ros2/microros packages import. To install it, using pip, you have to execute the next bash line
+
+```console
+sudo pip install vcstool
+```
 
 
 
@@ -135,12 +149,33 @@ repositories:
     version: 0.5.2
   eProsima/micro-CDR:
     type: git
-    url: https://gitlab.sambaserver.eprosima.com/eProsima/microcdr.git
+    url: https://github.com/eProsima/micro-CDR.git
     version: v1.0.0beta2
   eProsima/micrortps-client:
     type: git
-    url: https://gitlab.sambaserver.eprosima.com/eProsima/micrortps-client.git
-    version: v1.0.0beta2
+    url: https://github.com/eProsima/micro-RTPS-client.git
+    version: feature/reference
+  eProsima/fastrtps:
+    type: git
+    url: https://github.com/eProsima/Fast-RTPS.git
+    version: feature/attributes
+  microROS/rmw_micrortps:
+    type: git
+    url: https://gitlab.intranet.eprosima.com/eProsima/rmw_micrortps.git
+    version: feature/xml
+  microROS/micro-ros-agent:
+    type: git
+    url: https://gitlab.intranet.eprosima.com/eProsima/micro-ros-agent.git
+    version: developJ
+  microROS/rosidl_typesupport_micrortps:
+    type: git
+    url: https://gitlab.intranet.eprosima.com/eProsima/rosidl_typesupport_micrortps.git
+    version: develop
+  microROS/micro-ros-demo:
+    type: git
+    url: https://gitlab.intranet.eprosima.com/eProsima/micro-ros-demo.git
+    version: develop
+
 ~~~
 
 
@@ -165,13 +200,20 @@ After this you should have located inside the src folder all the micro-ros packa
 
 ## Step 3: Build ros2
 
-colcon is the tool used for building all micro-ros packages. For build the project you should execute the next bash line.
+For build the project you should execute the next bash line.
 
 ```console
 $ colcon build --cmake-args -DBUILD_SHARED_LIBS=ON
 ```
 
-After this, there will be three new folder placed.
+This bash execution will:
+ - Look for all packages in the directory (and its recurrent) starting from where you have call it.
+ - Build all dependencies and configure the cmake paths so the dependent package can find them.
+ - Install all packages.
+ - Generate a running setup script.
+ 
+
+After the bash execution three new folders will be placed.
 - The build directory will be where intermediate files are stored. For each package a subfolder will be created in which e.g. CMake is being invoked.
 - The install directory is where each package will be installed to. By default each package will be installed into a separate subdirectory.
 - The log directory contains various logging information about each colcon invocation.
