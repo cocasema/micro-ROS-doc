@@ -1,53 +1,62 @@
-# Overview
+# Micro-ROS Setup
 
+## Overview
 
-This will provide you with a quick summary of how install and configure the ros2 environment for a micro-ros workspace. This steps are tested in ubuntu operation system.
+This guide provides you with a quick summary of how to install and configure the ROS2 environment for a micro-ROS workspace.
 
+## Windows
 
-## Step 1: Generate ros2 enciroment
+## Linux
 
-Below are two ways to generate a working environment for ros2.
+### Step 1: Set-up ROS2 environment
 
-### Using doker
+Below are two ways to set-up a working environment for ROS2.
 
-The essyest option is to build a docker image with all needed tools. This also is de better than the second option due to the doker virtualization environment will isolate the micro-ros enviroment from the local operating system enviroment, so our host operating system won't interfere with the micro-ros compilation processes.
+#### Using Docker
 
-For this step is necessary to have the docker virtualization software installed on the host computer. The linked [tutorial](https://runnable.com/docker/install-docker-on-linux) will guides you to how install docker damemon. Also, if you want to know more about dockers virtualizavion you can visit the [web page](https://docs.docker.com/).
+The easiest option is to run a Docker container with all needed tools. Using Docker containers is preferred to the second option due to the isolation provided by Docker containers to your micro-ROS environment from the local operating system, so our host operating system and tools won't interfere with the micro-ROS compilation processes.
 
-One you have the docker installed you can execute this bash line to download the needed docker image.
-```console
-$docker pull boouga/bouncy_ros2_build_sources IMAGE_NAME
+For this step is necessary to have Docker engine installed on the host computer. The oficial [tutorial](https://runnable.com/docker/install-docker-on-linux) can help you installing and setting-up Docker. Also, if you want to know more about Dockers technology you can visit the [web page](https://docs.docker.com/).
+
+To run the docker environment, you have to execute the next bash line.
+
+```bash
+docker run -it --privileged --mount type=bind,source="WORKSPACE_PATH",target="/root/ros2_ws/" --net=host microros
 ```
-This will download one docker image that will contains all required tools. The image will be named as "IMAGE_NAME". In case you don't set the image name value, it will be named as the remote pulled image is. 
 
+Once you have the docker installed, you can execute this bash line to download the needed docker image.
+
+```bash
+docker pull boouga/bouncy_ros2_build_sources IMAGE_NAME
+```
+
+This Docker image has been pre-built with the ROS2 environment for the Bouncy release and this command will download it. The image will be named as "IMAGE_NAME". In case you don't set the image name value, it will be named as the remote pulled image is.
 
 To run the docker image you have to execute the next bash line.
-```console
-$docker run -it --privileged --mount type=bind,source="WORKSPACE_PATH",target="/root/ros2_ws/" --net=host microros
+
+```bash
+docker run -it --privileged --mount type=bind,source="WORKSPACE_PATH",target="/root/ros2_ws/" --net=host microros
 ```
 
 Note: The "--mount type=bind,source="WORKSPACE_PATH",target="/root/ros2_ws/" argument will link your local directory WORKSPACE_PATH to the '/root/ros2_ws/' placed in the running docker container.  This means, all changes you make inside this directory will take place in you local directory.
 
-
-## Installing ros2 environment into host operation system
+## Installing ROS2 environment into host operation system
 
 For this option you will need to install in your host:
 
-- Ros2: This is needed for build, run and manage ros2 packages. The installation is full documented in this [link](https://github.com/ros2/ros2/wiki/Installation).
+- Ros2: This is needed for build, run and manage ROS2 packages. The installation is full documented in this [link](https://github.com/ros2/ros2/wiki/Installation).
 
-- pip: This is a package manager needed to intall the VCS import tool. The installation if full documente in this [link](https://pip.pypa.io/en/stable/installing/)
+- pip: This is a package manager needed to intall the VCS import tool. The installation if full documented in this [link](https://pip.pypa.io/en/stable/installing/)
 
-- VSC import: This tool is requiered for the ros2/microros packages import. To install it, using pip, you have to execute the next bash line
+- VSC import: This tool is required for the ros2/microros packages import. To install it, using pip, you have to execute the next bash line
 
-```console
+```bash
 sudo pip install vcstool
 ```
 
+## Step 2: import micro-ROS packages
 
-
-## Step 2: import micro-ros packages
-
-In this step you are going to import all micro-ros packages. First you have to create the the micro_ros.repo with the following content and place it into the ros2 work space "WORKSPACE_PATH".
+In this step you are going to import all micro-ROS packages. First you have to create the the micro_ros.repo with the following content and place it into the ROS2 work space "WORKSPACE_PATH".
 
 ~~~
 repositories:
@@ -163,75 +172,72 @@ repositories:
     type: git
     url: https://gitlab.intranet.eprosima.com/eProsima/rmw_micrortps.git
     version: feature/xml
-  microROS/micro-ros-agent:
+  microROS/micro-ROS-agent:
     type: git
-    url: https://gitlab.intranet.eprosima.com/eProsima/micro-ros-agent.git
+    url: https://gitlab.intranet.eprosima.com/eProsima/micro-ROS-agent.git
     version: developJ
   microROS/rosidl_typesupport_micrortps:
     type: git
     url: https://gitlab.intranet.eprosima.com/eProsima/rosidl_typesupport_micrortps.git
     version: develop
-  microROS/micro-ros-demo:
+  microROS/micro-ROS-demo:
     type: git
-    url: https://gitlab.intranet.eprosima.com/eProsima/micro-ros-demo.git
+    url: https://gitlab.intranet.eprosima.com/eProsima/micro-ROS-demo.git
     version: develop
 
 ~~~
 
-
 If you are using the docker file you should execute the next bash lines to download all required packages.  
 
-```console
-$ cd /home/ws_ros2
-$ mkdir src
-$ vcs import src < ros2.repos
+```bash
+cd /home/ws_ros2
+mkdir src
+vcs import src < ros2.repos
 ```
 
 If you are using the host operation system environment you will have to execute the commad inside the workspace folder.
 
-```console
-$ cd WORKSPACE_PATH
-$ mkdir src
-$ vcs import src < ros2.repos
+```bash
+cd WORKSPACE_PATH
+mkdir src
+vcs import src < ros2.repos
 ```
 
-After this you should have located inside the src folder all the micro-ros packages.
+After this you should have located inside the src folder all the micro-ROS packages.
 
+### Step 3: Build micro-ROS
 
-## Step 3: Build ros2
+Colcon is the tool used for building all micro-ROS packages. To build the project, you should execute the next bash line.
 
-For build the project you should execute the next bash line.
-
-```console
-$ colcon build --cmake-args -DBUILD_SHARED_LIBS=ON
+```bash
+colcon build --cmake-args -DBUILD_SHARED_LIBS=ON
 ```
 
 This bash execution will:
- - Look for all packages in the directory (and its recurrent) starting from where you have call it.
- - Build all dependencies and configure the cmake paths so the dependent package can find them.
- - Install all packages.
- - Generate a running setup script.
- 
 
-After the bash execution three new folders will be placed.
-- The build directory will be where intermediate files are stored. For each package a subfolder will be created in which e.g. CMake is being invoked.
-- The install directory is where each package will be installed to. By default each package will be installed into a separate subdirectory.
-- The log directory contains various logging information about each colcon invocation.
-	
+- Look for all packages in the directory (and its recurrent) starting from where you have call it.
+- Build all dependencies and configure the cmake paths so the dependent package can find them.
+- Install all packages.
+- Generate a running setup script.
 
-## Step 4: Configure execution enviroment
+After the bash execution Colcon place three new folders into your working dir:
 
-For the purpose of running ros2 nodes you should configure the  environment using a generated script created after build step. For this, you have to execute the next bash line:
+- The build directory is where Colcon stores intermediate files. For each package, Colcon creates a subfolder in which CMake is invoked.
+- The install directory is where Colcon installs each package. By default, each package gets installed into a separate subdirectory.
+- The log directory contains various logging information about each package build process.
 
-```console
-$ . ~/ros2_ws/install/local_setup.bash
+### Step 4: Configure execution environment
+
+To run micro-ROS2 applications, you should configure the environment using a generated script created after build step. For this, you have to execute the next command:
+
+```bash
+. ~/ros2_ws/install/local_setup.bash
 ```
 
-Once you have executed de configuration script, you should be able to execute any ros2 nodes.
+Once you have executed de configuration script, you should be able to execute any ROS2 nodes.
 
+### References documentation
 
-##  References documentation
+- [Colcon build tool](https://github.com/ROS2/ROS2/wiki/Colcon-Tutorial)
 
-- [Colcon build tool](https://github.com/ros2/ros2/wiki/Colcon-Tutorial)
-
-- [Ros2](https://github.com/ros2/ros2/wiki)
+- [Ros2](https://github.com/ROS2/ROS2/wiki)
