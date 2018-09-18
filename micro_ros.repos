@@ -118,7 +118,7 @@ repositories:
   microROS/rmw_micrortps:
     type: git
     url: https://gitlab.intranet.eprosima.com/eProsima/rmw_micrortps.git
-    version: feature/xml
+    version: feature/fixwindows
   microROS/micro-ros-agent:
     type: git
     url: https://gitlab.intranet.eprosima.com/eProsima/micro-ros-agent.git
@@ -131,4 +131,3 @@ repositories:
     type: git
     url: https://gitlab.intranet.eprosima.com/eProsima/micro-ros-demo.git
     version: develop
-    
