@@ -85,8 +85,8 @@ repositories:
     version: 0.5.0
   ros2/rclc:
     type: git
-    url: https://github.com/ros2/rclc.git
-    version: master
+    url: https://gitlab.intranet.eprosima.com/eProsima/rclc.git
+    version: develop
   ros2/libyaml_vendor:
     type: git
     url: https://github.com/ros2/libyaml_vendor.git
