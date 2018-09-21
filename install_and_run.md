@@ -6,7 +6,59 @@ This guide provides you with a quick summary of how to install and configure the
 
 ## Windows
 
-## Linux
+### Step 1: Set-up ROS2 environment on Windows
+
+The development environment for micro-ROS in Windows platforms is the same as the one for [ROS2](https://github.com/ros2/ros2/wiki), so the same set-up is needed.
+You can follow the [ROS2 installation guide.](https://github.com/ros2/ros2/wiki/Windows-Development-Setup)
+
+#### Using python virtual environments to isolate ROS2 environment
+
+To avoid polluting your environment, you can set up a python virtualenv with all the tools needed for building micro-ROS.
+For doing so you need to install [virtualenv](https://virtualenv.pypa.io/en/stable/) (assuming you have already installed [python](https://www.python.org/) and [pip](https://pip.pypa.io/en/stable/)).
+
+```bash
+pip install virtualenv
+virtualenv VIRTUAL_ENV_LOCAL_DIRECTORY
+VIRTUAL_ENV_LOCAL_DIRECTORY\Scripts\activate
+pip install -U vcstool
+pip install -U colcon-common-extensions
+```
+
+Once you execute the previous commands, you should have a python virtual env configured for micro-ROS compilation.
+This python virtualenv resides in the given directory VIRTUAL_ENV_LOCAL_DIRECTORY.
+
+Each time you want to work on micro-ROS, you merely need to run ```VIRTUAL_ENV_LOCAL_DIRECTORY\Scripts\activate``` and then the following commands you issue run using the virtualenv tools.
+
+For shutting down an activate python virtual env.
+
+### Step 2: import micro-ROS packages on Windows
+
+For using micro-ROS, You need a predefined group of ROS2 packages.
+A [YAML](http://yaml.org/) file for [vcstool](https://github.com/dirk-thomas/vcstool) is provided to sync all the needed sources easily.
+
+```bash
+vcs import < micro_ros.repo
+```
+
+### Step 3: Build micro-ROS on Windows
+
+In windows, you need to run [colcon](https://colcon.readthedocs.io/en/released/) build command inside your Visual Studio command prompt ("x64 Native Tools Command Prompt for VS 2017" in our case)
+
+```bash
+colcon build --cmake-args -DBUILD_SHARED_LIBS=ON
+```
+
+### Step 4: Configure execution environment on Windows
+
+Once colcon has finished building micro-ROS, you need to set up the environment, so it finds all the required DLLs to run applications.
+For doing so, colcon has copied for us the following batch file.
+
+```bash
+install\local_setup.bat
+```
+
+The previous batch, sets up the environment for the current cmd session.
+From now on we can run our sample nodes.
 
 ### Step 1: Set-up ROS2 environment
 
