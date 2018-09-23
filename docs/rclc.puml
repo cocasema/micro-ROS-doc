@@ -92,7 +92,6 @@ skinparam {
     backgroundColor #85bbf0
   }
 }
-!define Struct (S,#CEFA87)
 
 box "user code" #f2f2f2
   participant "User Application" as UA
@@ -117,7 +116,6 @@ end box
 autoactivate on
 hide footbox
 
-' Initialization
 == Initialization ==
 UA -> rclc: rclc_init
 rclc -> rcl: init
