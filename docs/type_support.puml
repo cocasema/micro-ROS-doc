@@ -1,0 +1,87 @@
+@startuml type_support_code
+
+class rosidl_message_type_support_t
+{
+  const char * typesupport_identifier
+  const void * data
+  rosidl_message_typesupport_handle_function func
+}
+
+class message_type_support_callbacks_t
+{
+  const char * package_name_
+  const char * message_name_
+
+  bool (* cdr_serialize)(const void * untyped_ros_message, MicroBuffer * cdr)
+  bool (* cdr_deserialize)(MicroBuffer * cdr, void * untyped_ros_message)
+  uint32_t (* get_serialized_size)(const void *)
+  size_t (* max_serialized_size)(bool full_bounded)
+  
+}
+
+rosidl_message_type_support_t *- message_type_support_callbacks_t
+
+@enduml
+
+@startuml interface_generators
+
+component [ROS_interfaces] {
+  artifact "msgA.msg" as ta
+  artifact "msgB.msg" as tb
+  note as in
+  User defined messages
+  types .msg
+  end note
+}
+
+
+component [colcon]
+package "Interface Generators" as ig {
+component [rosidl_typessuport_c]
+component [rosidl_generator_c]
+component [rosidl_typesupport_micrortps_c]
+}
+note left of ig
+rosidl_generator_c provides: <msg>_struct, 
+<msg>_functions and <msg>_type_support
+rosidl_typessuport_c declares <msg>_type_support_c.
+rosidl_typesupport_micrortps_c adds
+<msg>_rosidl_typesupport_micrortps_c and defines
+<msg>_type_support_c
+end note
+
+
+component [msg_type] {
+  artifact "<msg>__struct" as ms
+  artifact "<msg>__functions" as mf
+  artifact "<msg>__type_support" as mts
+  artifact "<msg>__type_support_c" as mtsc
+  artifact "<msg>__rosidl_typesupport_micrortps_c" as mrtsc
+}
+
+note bottom of msg_type
+This is the result of multiple generators.
+For each ROS message definition found by colcon.
+C type representation and middleware support are generated.
+end note
+
+colcon --> ROS_interfaces : build
+note right of colcon
+rosidl_generator_c, rosidl_typessuport_c and
+rosidl_typesupport_micrortps_c are registered
+as interface_generators in the build system.
+end note
+
+
+ROS_interfaces --> rosidl_generator_c
+ROS_interfaces --> rosidl_typessuport_c
+ROS_interfaces --> rosidl_typesupport_micrortps_c
+'rosidl_generator_c -[hidden]- rosidl_typessuport_c
+'rosidl_typessuport_c -[hidden]- rosidl_typesupport_micrortps_c
+
+rosidl_generator_c --> msg_type : EmPy
+rosidl_typessuport_c --> msg_type : EmPy
+rosidl_typesupport_micrortps_c --> msg_type : EmPy
+
+msg_type ..> tb
+@enduml
