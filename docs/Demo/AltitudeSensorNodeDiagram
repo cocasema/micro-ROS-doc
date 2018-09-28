@@ -1,0 +1,17 @@
+@startuml
+
+:main();
+:Create node;
+:Create altitude publisher; 
+
+while (rclc_ok?)
+    :wait random time;
+    :Generate new altitude value;
+    :Publish altitude value;
+endwhile
+
+
+stop
+
+
+@enduml

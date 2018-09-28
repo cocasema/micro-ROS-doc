@@ -1,0 +1,28 @@
+@startuml
+
+:main();
+:Create node;
+:Create altitude subscription; 
+:Create status subscription;
+:Create engine power subcription;  
+:rclc_spin;
+
+stop
+
+
+:Altitude_callback();
+:Update Display state;
+:Store value;
+stop
+
+
+:Engine_power_callback();
+:Store value;
+:Update Display state;
+stop
+
+:Status_callback();
+:Store value;
+:Update Display state;
+stop
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+
+:main();
+:Create node;
+:Create engine inc subscription; 
+:Create engine status publisher;
+:rclc_spin;
+
+stop
+
+
+:Engine_inc_callback();
+:add engine inc vale;
+:Publish new engine power value;
+stop
+
+@enduml
