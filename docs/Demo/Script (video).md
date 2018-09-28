@@ -260,7 +260,7 @@ repositories:
   src/micro-ros-demo:
     type: git
     url: git@gitlab.intranet.eprosima.com:eProsima/micro-ros-demo.git
-    version: Ros2_demo
+    version: Demo_Beta_Ros2
     " > /root/ros2_ws/ros2.repo
 ```
 
@@ -343,26 +343,6 @@ repositories:
     type: git
     url: https://github.com/ament/uncrustify.git
     version: 3cf6a5a9f8e731c97a8f8e9f03003d0d1357df51
-  src/eProsima/Fast-CDR:
-    type: git
-    url: https://github.com/eProsima/Fast-CDR.git
-    version: develop
-  src/eProsima/Fast-RTPS:
-    type: git
-    url: https://github.com/eProsima/Fast-RTPS.git
-    version: develop
-  src/eProsima/micro-CDR:
-    type: git
-    url: https://github.com/eProsima/micro-CDR.git
-    version: develop
-  src/eProsima/micro-RTPS-agent:
-    type: git
-    url: https://github.com/eProsima/micro-RTPS-agent.git
-    version: develop
-  src/eProsima/micro-RTPS-client:
-    type: git
-    url: https://github.com/eProsima/micro-RTPS-client.git
-    version: develop
   src/osrf/osrf_testing_tools_cpp:
     type: git
     url: https://github.com/osrf/osrf_testing_tools_cpp.git
@@ -379,10 +359,6 @@ repositories:
     type: git
     url: https://github.com/ros2/libyaml_vendor.git
     version: c69f385ebb8c971b9bdd2a87fc983c5a12b12811
-  src/ros2/micro-ros-agent:
-    type: git
-    url: git@gitlab.intranet.eprosima.com:eProsima/micro-ros-agent.git
-    version: developJ
   src/ros2/poco_vendor:
     type: git
     url: https://github.com/ros2/poco_vendor.git
@@ -395,10 +371,6 @@ repositories:
     type: git
     url: https://github.com/ros2/rcl_interfaces.git
     version: d209af6a5d3c631c7059469f4f30983a57d8b950
-  src/ros2/rclc:
-    type: git
-    url: https://github.com/ros2/rclc.git
-    version: master
   src/ros2/rcutils:
     type: git
     url: https://github.com/ros2/rcutils.git
@@ -419,10 +391,6 @@ repositories:
     type: git
     url: https://github.com/ros2/rosidl.git
     version: 5cdd36e02e0ad66a7652feed03bede33466413cf
-  src/ros2/rosidl_dds:
-    type: git
-    url: https://github.com/ros2/rosidl_dds.git
-    version: master
   src/ros2/rosidl_defaults:
     type: git
     url: https://github.com/ros2/rosidl_defaults.git
@@ -431,18 +399,50 @@ repositories:
     type: git
     url: https://github.com/ros2/rosidl_typesupport.git
     version: 45f5a0ad4d9eaa5fc9303be2633a1e306b84026f
-  src/micro-ros-demo:
+  src/ros2/rclc:
     type: git
-    url: git@gitlab.intranet.eprosima.com:eProsima/micro-ros-demo.git
-    version: MicroRos_demo
-  src/ros2/rmw_micrortps:
+    url: git@gitlab.intranet.eprosima.com:eProsima/rclc.git
+    version: 51f0743b83f04081dc486f79b22dfbe8b761e7e2
+  src/ros2/rosidl_dds:
     type: git
-    url: git@gitlab.intranet.eprosima.com:eProsima/rmw_micrortps.git
-    version: multiPubSub
+    url: https://github.com/ros2/rosidl_dds.git
+    version: 0.5.0
+  src/eProsima/Fast-CDR:
+    type: git
+    url: https://github.com/eProsima/Fast-CDR.git
+    version: 3a99f4cd02b136756cee6bf7ef2650c809369f1f
+  src/eProsima/Fast-RTPS:
+    type: git
+    url: https://github.com/eProsima/Fast-RTPS.git
+    version: a02c069b6f8067f335f588c3e11a359492b31587
+  src/eProsima/micro-CDR:
+    type: git
+    url: https://github.com/eProsima/micro-CDR.git
+    version: da4c5583668127013e6d52fca56eb0cf8e0474f7
+  src/eProsima/micro-RTPS-agent:
+    type: git
+    url: https://github.com/eProsima/micro-RTPS-agent.git
+    version: b3d10731321bd077956737842073554457bc1e09
+  src/eProsima/micro-RTPS-client:
+    type: git
+    url: https://github.com/eProsima/micro-RTPS-client.git
+    version: 212d8ca9fb071b71339c2bc7ac9d8596ad9b1843
+  src/ros2/micro-ros-agent:
+    type: git
+    url: git@gitlab.intranet.eprosima.com:eProsima/micro-ros-agent.git
+    version: Demo_Beta
   src/ros2/rosidl_typesupport_micrortps:
     type: git
     url: git@gitlab.intranet.eprosima.com:eProsima/rosidl_typesupport_micrortps.git
-    version: develop_Javier
+    version: Demo_Beta
+  src/ros2/rmw_micrortps:
+    type: git
+    url: git@gitlab.intranet.eprosima.com:eProsima/rmw_micrortps.git
+    version: Demo_Beta
+  src/micro-ros-demo:
+    type: git
+    url: git@gitlab.intranet.eprosima.com:eProsima/micro-ros-demo.git
+    version: Demo_Beta_MicroRos
     " > /root/ros2_ws/MicroRos_demo.repo
 ```
 
