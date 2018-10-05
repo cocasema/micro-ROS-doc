@@ -1,13 +1,43 @@
 @startuml(id=test_id) type_support_code
 
-class rosidl_message_type_support_t
+skinparam {
+  shadowing false
+  arrowColor #Gray
+  actorBorderColor #Gray
+  componentBorderColor #Gray
+  rectangleBorderColor #Gray
+  noteBackgroundColor #ffffff
+  noteBorderColor #Gray
+  rectangleFontColor #ffffff
+  rectangleStereotypeFontColor #ffffff
+  sequence {
+    arrowColor #Gray
+    lifeLineBorderColor #Gray
+    lifeLineBackgroundColor #Gray
+  }
+  class {
+	  borderColor #Gray
+    backgroundColor #87CEFA
+  }
+  participant {
+    borderColor #Gray
+    backgroundColor #87CEFA
+  }
+  entity {
+    borderColor #Gray
+    backgroundColor #87CEFA
+  }
+}
+!define Struct (S,#CEFA87)
+
+class rosidl_message_type_support_t <<Struct>>
 {
   const char * typesupport_identifier
   const void * data
   rosidl_message_typesupport_handle_function func
 }
 
-class message_type_support_callbacks_t
+class message_type_support_callbacks_t <<Struct>>
 {
   const char * package_name_
   const char * message_name_
@@ -24,7 +54,35 @@ rosidl_message_type_support_t *- message_type_support_callbacks_t
 @enduml
 
 @startuml interface_generators
-
+skinparam {
+  shadowing false
+  arrowColor #Gray
+  actorBorderColor #Gray
+  componentBorderColor #Gray
+  rectangleBorderColor #Gray
+  noteBackgroundColor #ffffff
+  noteBorderColor #Gray
+  rectangleFontColor #    ffffff
+  rectangleStereotypeFontColor #ffffff
+  sequence {
+    arrowColor #Gray
+    lifeLineBorderColor #Gray
+    lifeLineBackgroundColor #Gray
+  }
+  class {
+	  borderColor #Gray
+    backgroundColor #87CEFA
+  }
+  participant {
+    borderColor #Gray
+    backgroundColor #87CEFA
+  }
+  entity {
+    borderColor #Gray
+    backgroundColor #87CEFA
+  }
+}
+!define Struct (S,#CEFA87)
 component [ROS_interfaces] {
   artifact "msgA.msg" as ta
   artifact "msgB.msg" as tb
