@@ -1,0 +1,38 @@
+@startuml
+
+Class rmw_node_t
+{
+  const char* implementation_identifier
+  void* data
+  const char* name
+  const char* namespace_
+}
+
+Class rmw_plusher_t
+{
+    const char* implementation_identifier
+    void* data
+    const char* topic_name    
+}
+
+Class rosidl_message_type_support_t
+{
+    const char* typesupport_identifier
+    void* data
+    func
+}
+
+
+Class MicroNode
+{
+    udp
+    session
+    participant_id
+    publisher_id[max_publishers]
+    datawriter_id[max_datawriters]
+}
+
+rmw_node_t *-- MicroNode
+rmw_plusher_t *-- rosidl_message_type_support_t
+
+@enduml

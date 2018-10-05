@@ -1,0 +1,256 @@
+@startuml rmw_micrortps_code
+skinparam {
+  shadowing false
+  arrowColor #Gray
+  actorBorderColor #Gray
+  componentBorderColor #Gray
+  rectangleBorderColor #Gray
+  noteBackgroundColor #ffffff
+  noteBorderColor #Gray
+  rectangleFontColor #ffffff
+  rectangleStereotypeFontColor #ffffff
+  sequence {
+    arrowColor #Gray
+    lifeLineBorderColor #Gray
+    lifeLineBackgroundColor #Gray
+  }
+  class {
+	  borderColor #Gray
+    backgroundColor #87CEFA
+  }
+  participant {
+    borderColor #Gray
+    backgroundColor #87CEFA
+  }
+  entity {
+    borderColor #Gray
+    backgroundColor #87CEFA
+  }
+}
+!define Struct (S,#CEFA87)
+
+class RawBuffer <<Struct>>
+{
+    uint8_t mem_head[RMW_MICRORTPS_SUBSCRIBER_RAW_BUFFER_SIZE]
+    uint8_t* mem_tail
+    uint8_t* write
+    uint8_t* read
+    size_t raw_data_size
+}
+
+Class CustomSubscription <<Struct>>
+{
+    mrObjectId subscriber_id
+    mrObjectId datareader_id
+    mrObjectId topic_id
+    rmw_gid_t subscription_gid
+    const message_type_support_callbacks_t* type_support
+    struct CustomNode* owner_node
+    mrSession* session
+
+    RawBuffer subscription_buffer;
+
+    bool waiting_for_response
+
+    struct Item mem
+}
+
+Class CustomPublisher <<Struct>>
+{
+    mrObjectId publisher_id
+    mrObjectId datawriter_id
+    mrObjectId topic_id
+    rmw_gid_t publisher_gid
+    const message_type_support_callbacks_t* type_support
+    mrSession* session
+    struct Item mem
+
+    struct CustomNode* owner_node
+
+}
+
+Class CustomNode <<Struct>>
+{
+    mrSerialTransport transport
+    mrUDPTransport transport
+
+    mrSession session
+    mrObjectId participant_id
+    struct MemPool publisher_mem
+    struct MemPool subscription_mem
+    struct Item mem
+
+    CustomPublisher publisher_info[MAX_PUBLISHERS_X_NODE]
+    CustomSubscription subscription_info[MAX_SUBSCRIPTIONS_X_NODE]
+
+    bool on_subcription
+
+    mrStreamId reliable_input
+    mrStreamId reliable_output
+
+    uint8_t input_reliable_stream_buffer[MAX_BUFFER_SIZE]
+    uint8_t output_reliable_stream_buffer[MAX_BUFFER_SIZE]
+
+    uint8_t deserialize_temp_buffer[MAX_TRANSPORT_MTU]
+
+    uint16_t id_gen
+
+}
+
+CustomSubscription *-- RawBuffer
+CustomPublisher "0..MAX_PUBLISHERS_X_NODE" *-- "1" CustomNode
+CustomSubscription "0..MAX_SUBSCRIPTIONS_X_NODE" *-- "1" CustomNode
+
+@enduml
+
+@startuml rmw_micrortps_flows
+skinparam {
+  shadowing false
+  arrowColor #Gray
+  actorBorderColor #Gray
+  componentBorderColor #Gray
+  rectangleBorderColor #Gray
+  noteBackgroundColor #ffffff
+  noteBorderColor #Gray
+  rectangleFontColor #ffffff
+  rectangleStereotypeFontColor #ffffff
+  sequence {
+    arrowColor #Gray
+    lifeLineBorderColor #Gray
+    lifeLineBackgroundColor #Gray
+  }
+  class {
+	  borderColor #Gray
+    backgroundColor #85bbf0
+  }
+  participant {
+    borderColor #Gray
+    backgroundColor #85bbf0
+  }
+  entity {
+    borderColor #Gray
+    backgroundColor #85bbf0
+  }
+}
+
+box "rcl" #f2f2f2
+  participant rcl
+end box
+box "rmw_micrortps" #ecfdd0
+  participant rmw_micrortps
+  participant rmw_node
+  participant rmw_publisher
+  participant rmw_subscription
+  participant rmw_wait
+end box
+box "rosidl_typesupport_c" #f2f2f2
+  participant ts as "type_support" <<type>>
+end box
+box "Micro-RTPS" #f2f2f2
+  participant micro_rtps_client
+end box
+box "Micro-ROS-Agent" #f2f2f2
+  participant micro_rtps_agent
+end box
+autoactivate on
+hide footbox
+
+== Initialization ==
+rcl -> rmw_micrortps: rclc_init
+rmw_micrortps -> rmw_micrortps: init
+deactivate
+rcl <-- rmw_micrortps
+
+== Creation ==
+create rmw_node
+rcl -> rmw_node: rmw_create_node
+rmw_node -> micro_rtps_client: mr_init_transport
+rmw_node <-- micro_rtps_client
+rmw_node -> micro_rtps_client: mr_create_session
+micro_rtps_client -> micro_rtps_agent
+micro_rtps_client <-- micro_rtps_agent
+rmw_node <-- micro_rtps_client
+rmw_node -> micro_rtps_client: mr_write_create_participant
+rmw_node <-- micro_rtps_client
+rmw_node -> micro_rtps_client: mr_run_session_until_all_status
+micro_rtps_client -> micro_rtps_agent
+micro_rtps_client <-- micro_rtps_agent
+rmw_node <-- micro_rtps_client
+rcl <-- rmw_node: return rmw_node
+
+create rmw_publisher
+rcl -> rmw_publisher: rmw_create_publisher
+rmw_publisher <-- micro_rtps_client
+rmw_publisher -> micro_rtps_client: mr_write_create_publisher
+rmw_publisher <-- micro_rtps_client
+rmw_publisher -> micro_rtps_client: mr_write_create_topic
+rmw_publisher <-- micro_rtps_client
+rmw_publisher -> micro_rtps_client: mr_write_create_datawriter
+rmw_publisher <-- micro_rtps_client
+rmw_publisher -> micro_rtps_client: mr_run_session_until_all_status
+micro_rtps_client -> micro_rtps_agent
+micro_rtps_client <-- micro_rtps_agent
+rmw_publisher <-- micro_rtps_client
+rcl <-- rmw_publisher: return rmw_publisher
+
+create rmw_subscription
+rcl -> rmw_subscription: rmw_create_subscription
+rmw_subscription <-- micro_rtps_client
+rmw_subscription -> micro_rtps_client: mr_write_create_subscriber
+rmw_subscription <-- micro_rtps_client
+rmw_subscription -> micro_rtps_client: mr_write_create_topic
+rmw_subscription <-- micro_rtps_client
+rmw_subscription -> micro_rtps_client: mr_write_create_datareader
+rmw_subscription <-- micro_rtps_client
+rmw_subscription -> micro_rtps_client: mr_run_session_until_all_status
+micro_rtps_client -> micro_rtps_agent
+micro_rtps_client <-- micro_rtps_agent
+rmw_subscription <-- micro_rtps_client
+rcl <-- rmw_subscription: return rmw_subscription
+
+== Operate ==
+
+' Publish
+rcl -> rmw_publisher: rmw_publish(ros_message)
+rmw_publisher -> micro_rtps_client: prepare_buffer
+rmw_publisher <-- micro_rtps_client: prepare_buffer
+rmw_publisher -> ts: serialize
+rmw_publisher <-- ts
+rmw_publisher -> micro_rtps_client: mr_run_session_until_all_status
+micro_rtps_client -> micro_rtps_agent
+micro_rtps_client <-- micro_rtps_agent
+rmw_publisher <-- micro_rtps_client
+rcl <-- rmw_publisher
+
+    ' Wait
+    rcl -> rmw_micrortps: rmw_wait
+    loop subscriptions
+        rmw_micrortps -> micro_rtps_client: request_data
+        rmw_micrortps <-- micro_rtps_client
+    end
+    loop while not time out or not topic received
+        rmw_micrortps -> micro_rtps_client: mr_run_session_until_timeout
+        micro_rtps_client -> micro_rtps_agent
+    opt if topic message
+        micro_rtps_client <- micro_rtps_agent
+        rmw_node <- micro_rtps_client: on_topic
+        rmw_node --> micro_rtps_client
+        micro_rtps_client --> micro_rtps_agent
+    end
+    deactivate micro_rtps_agent
+    rmw_micrortps <-- micro_rtps_client
+    end
+    rcl <-- rmw_micrortps
+
+' take
+rcl -> rmw_subscription: take(ros_message)
+rmw_subscription -> ts: deserialize
+rmw_subscription <-- ts
+rcl <-- rmw_subscription
+
+
+== Destruction ==
+
+' TODO
+
+@enduml
