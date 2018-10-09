@@ -1,4 +1,4 @@
-@startuml type_support_code
+@startuml(id=test_id) type_support_code
 
 class rosidl_message_type_support_t
 {
