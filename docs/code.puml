@@ -8,7 +8,7 @@ Class rmw_node_t
   const char* namespace_
 }
 
-Class rmw_plusher_t
+Class rmw_publisher_t
 {
     const char* implementation_identifier
     void* data
@@ -19,9 +19,8 @@ Class rosidl_message_type_support_t
 {
     const char* typesupport_identifier
     void* data
-    func
+    const rosidl_message_type_support_t * (* func)(const rosidl_message_type_support_t *, const char *);
 }
-
 
 Class MicroNode
 {
@@ -33,6 +32,6 @@ Class MicroNode
 }
 
 rmw_node_t *-- MicroNode
-rmw_plusher_t *-- rosidl_message_type_support_t
+rmw_publisher_t *-- rosidl_message_type_support_t
 
 @enduml
