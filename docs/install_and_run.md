@@ -8,7 +8,7 @@ This guide provides you with a quick summary of how to install and configure the
 
 ### Step 1: Set-up ROS2 environment on Windows
 
-The development environment for micro-ROS in Windows platforms is the same as the one for [ROS2](https://github.com/ros2/ros2/wiki), so the same set-up is needed.
+The development environment for micro-ROS in Windows platforms is the same as the one for [ROS2](https://github.com/2/ros2/wiki), so the same set-up is needed.
 You can follow the [ROS2 installation guide for windows.](https://index.ros.org/doc/ros2/Windows-Install-Binary/)
 
 #### Using python virtual environments to isolate ROS2 environment
@@ -33,7 +33,7 @@ For shutting down an activate python virtual env.
 
 #### Alternative: Using docker container
 
-As an alternative to the installation of the ros2 environment on windows, the user can download and compile a [docker](https://docs.docker.com/docker-for-windows/) image from [here](PENDING..).
+As an alternative to the installation of the ROS2 environment on windows, the user can download and compile a [docker](https://docs.docker.com/docker-for-windows/) image from [here](PENDING..).
 
 ```bash
 docker build -t ros2 DOCKER_FILE_PATH
@@ -108,7 +108,7 @@ You can follow the [ROS2 installation guide for Linux Debian.](https://index.ros
 
 #### Alternative: using docker container
 
-As an alternative to the installation of the ros2 environment on Linux Debian, the user can download and compile a [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/) image from [here](PENDING..).
+As an alternative to the installation of the ROS2 environment on Linux Debian, the user can download and compile a [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/) image from [here](PENDING..).
 
 ```bash
 docker build -t ros2 DOCKER_FILE_PATH
@@ -139,7 +139,7 @@ For this step you have to download a basic group of packages from [here](https:/
 Rename de downloaded file as 'micro_ros.repo' and place it in the same folder where you want to clone all the repositories.
 
 ```bash
-curl https://raw.githubusercontent.com/microROS/micro-ROS-doc/feature/repos/repos/uros_minimum.repos > micro_ros.repos
+wget https://raw.githubusercontent.com/microROS/micro-ROS-doc/feature/repos/repos/uros_minimum.repos -O micro_ros.repos
 ```
 
 Then, clone all repos.
