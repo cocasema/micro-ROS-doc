@@ -162,7 +162,7 @@ Once colcon has finished building micro-ROS, you need to set up the environment,
 For doing so, colcon has copied for us the following batch file.
 
 ```bash
-. ./install/local_setup.bat
+. ./install/local_setup.bash
 ```
 
 The previous batch, sets up the environment for the current shell session.
