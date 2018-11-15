@@ -31,10 +31,6 @@ repositories:
     type: git
     url: https://github.com/ament/uncrustify.git
     version: 0.66.1
-  osrf/osrf_testing_tools_cpp:
-    type: git
-    url: https://github.com/osrf/osrf_testing_tools_cpp.git
-    version: 1.0.0
   ros/class_loader:
     type: git
     url: https://github.com/ros/class_loader.git
@@ -206,6 +202,10 @@ repositories:
 
 # Changes from ROS 2.
 
+  osrf/osrf_testing_tools_cpp:
+    type: git
+    url: https://github.com/microROS/osrf_testing_tools_cpp.git
+    version: master
   ros2/rcl_interfaces:
     type: git
     url: https://github.com/ros2/rcl_interfaces.git
