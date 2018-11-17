@@ -105,7 +105,7 @@ repositories:
     version: v1.0.1
   eProsima/Micro-XRCE-DDS-Client:
     type: git
-    url: https://github.com/eProsima/micro-RTPS-client.git
+    url: https://github.com/eProsima/Micro-XRCE-DDS-Client.git
     version: v1.0.1
 
 # MicroROS
@@ -113,7 +113,7 @@ repositories:
   uros/micro-ROS-demo:
     type: git
     url: https://github.com/microROS/micro-ROS-demos.git
-    version: develop
+    version: v0.0.1-alpha
   uros/rmw_microxrcedds:
     type: git
     url: https://github.com/microROS/rmw-microxrcedds.git

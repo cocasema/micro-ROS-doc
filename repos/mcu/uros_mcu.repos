@@ -79,7 +79,7 @@ repositories:
   uros/micro-ROS-demo:
     type: git
     url: https://github.com/microROS/micro-ros-demos.git
-    version: develop
+    version: v0.0.1-alpha
   uros/rmw-microxrcedds:
     type: git
     url: https://github.com/microROS/rmw-microxrcedds.git

@@ -51,7 +51,7 @@ rclc is composed by four main C structures:
 
 You can find the diagram in [rclc.puml](rclc.puml).
 
-<!-- ![PlantUML model](http://www.plantuml.com/plantuml/proxy?src=https://raw.github.com/master/src/main/rclc.puml) -->
+<!-- ![PlantUML model](http://www.plantuml.com/plantuml/proxy src=https://raw.github.com/master/src/develop/rclc.puml) -->
 
 ## API
 
