@@ -10,10 +10,12 @@ micro-ROS is composed by multiple repositories:
     RMW implementation using Micro XRCE-DDS middleware.
 * [rosidl_typesupport_microxrcedds](https://github.com/microROS/rosidl_typesupport_microxrcedds):
     Type support for Micro XRCE-DDS
+* [micro-ROS-Agent](https://github.com/microROS/micro-ROS-Agent):
+    Micro-ROS-Agent package implementation.
 * [osrf_testing_tools_cpp](https://github.com/microROS/osrf_testing_tools_cpp):
     Common testing tools for C++ which are used for testing in various OSRF projects.
     It is a fork containing fixes.
-* [rclc](https://github.com/microROS/rmw-microxrcedds):
+* [rclc](https://github.com/microROS/rclc):
     ROS Client Library for the C language.
 * [rcl](https://github.com/microROS/rcl):
     Library to support the implementation of language-specific ROS Client Libraries.
