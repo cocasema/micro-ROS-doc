@@ -87,7 +87,7 @@ repositories:
   osrf/osrf_testing_tools_cpp:
     type: git
     url: https://github.com/microROS/osrf_testing_tools_cpp.git
-    version: master
+    version: v0.0.1-alpha
   ros2/rcl_interfaces:
     type: git
     url: https://github.com/ros2/rcl_interfaces.git
@@ -95,7 +95,7 @@ repositories:
   ros2/rclc:
     type: git
     url: https://github.com/microROS/rclc.git
-    version: develop
+    version: v0.0.1-alpha
 
 # Micro XRCE-DDS
 
