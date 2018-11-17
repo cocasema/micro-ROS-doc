@@ -1,0 +1,213 @@
+@startuml rclc_code
+skinparam {
+  shadowing false
+  arrowColor #Gray
+  actorBorderColor #Gray
+  componentBorderColor #Gray
+  rectangleBorderColor #Gray
+  noteBackgroundColor #ffffff
+  noteBorderColor #Gray
+  rectangleFontColor #ffffff
+  rectangleStereotypeFontColor #ffffff
+  sequence {
+    arrowColor #Gray
+    lifeLineBorderColor #Gray
+    lifeLineBackgroundColor #Gray
+  }
+  class {
+	  borderColor #Gray
+    backgroundColor #87CEFA
+  }
+  participant {
+    borderColor #Gray
+    backgroundColor #87CEFA
+  }
+  entity {
+    borderColor #Gray
+    backgroundColor #87CEFA
+  }
+}
+!define Struct (S,#CEFA87)
+
+Class rclc_subscription_t <<Struct>> 
+{
+  rcl_subscription_t rcl_subscription
+  rclc_callback_t user_callback
+  rclc_message_type_support_t type_support
+  rclc_node_t * node    
+  void (* rclc_callback_t)(const void *)
+}
+
+Class rclc_publisher_t <<Struct>>
+{
+  rcl_publisher_t rcl_publisher
+  rclc_node_t * node
+}
+
+Class rclc_node_t <<Struct>>
+{
+  rcl_node_t rcl_node
+  rclc_subscription_t ** subs
+  size_t subs_s
+}
+
+Class rclc_message_type_support_t <<Struct>>
+{
+  const rosidl_message_type_support_t * rosidl_message_type_support
+  size_t size_of
+}
+
+rclc_subscription_t "0..*" *-- "1" rclc_node_t
+rclc_publisher_t *-- rclc_node_t
+rclc_subscription_t *-- rclc_message_type_support_t
+
+@enduml
+
+@startuml rclc_flows
+skinparam {
+  shadowing false
+  arrowColor #Gray
+  actorBorderColor #Gray
+  componentBorderColor #Gray
+  rectangleBorderColor #Gray
+  noteBackgroundColor #ffffff
+  noteBorderColor #Gray
+  rectangleFontColor #ffffff
+  rectangleStereotypeFontColor #ffffff
+  sequence {
+    arrowColor #Gray
+    lifeLineBorderColor #Gray
+    lifeLineBackgroundColor #Gray
+  }
+  class {
+	  borderColor #Gray
+    backgroundColor #85bbf0
+  }
+  participant {
+    borderColor #Gray
+    backgroundColor #85bbf0
+  }
+  entity {
+    borderColor #Gray
+    backgroundColor #85bbf0
+  }
+}
+
+box "user code" #f2f2f2
+  participant "User Application" as UA
+end box
+box "rclc" #ecfdd0
+  participant rclc
+  participant rclc_node
+  participant rclc_publisher
+  participant rclc_subscription
+  participant rclc_message_type_support
+end box
+box "rcl" #f2f2f2
+  participant rcl
+  participant rcl_node
+  participant rcl_publisher
+  participant rcl_subscription
+  participant rcl_wait_set
+end box
+box "rosidl_typesupport_c" #f2f2f2
+  participant ts as "type_support" <<type>>
+end box
+autoactivate on
+hide footbox
+
+== Initialization ==
+UA -> rclc: rclc_init
+rclc -> rcl: init
+rclc <-- rcl
+UA <-- rclc
+
+== Creation ==
+!definelong CREATE(app, name)
+create rclc_##name
+UA -> rclc_##name: rclc_create_##name
+create rcl_##name
+rclc_##name -> rcl_##name
+rclc_##name <-- rcl_##name
+UA <-- rclc_##name: return rclc_##name
+!enddefinelong
+
+' Node creation
+CREATE(UA, node)
+' Publisher creation
+CREATE(UA, publisher)
+' Subscription creation
+CREATE(UA, subscription)
+
+' Type-support macro
+create rclc_message_type_support
+UA -> rclc_message_type_support: RCLC_GET_MSG_TYPE_SUPPORT(pkg, dir, msg)
+create ts
+rclc_message_type_support -> ts
+rclc_message_type_support <-- ts
+UA <-- rclc_message_type_support: return rclc_message_type_support
+
+== Operate ==
+
+' Publish
+UA -> rclc_publisher: rclc_publish(ros_message)
+rclc_publisher -> rcl_publisher: publish(ros_message)
+rclc_publisher <-- rcl_publisher
+UA <-- rclc_publisher
+
+!definelong COMMON_SPIN()
+rclc_node -> rcl_wait_set: wait(time)
+rclc_node <-- rcl_wait_set
+
+opt not timed out
+loop subcriptions
+rclc_node -> rclc_subscription: check_subscribtion
+rclc_subscription -> rcl_subscription: take(ros_message)
+rclc_subscription <-- rcl_subscription
+UA <-- rclc_subscription: callback
+end
+end
+!enddefinelong
+
+' Spin
+UA -> rclc_node: rclc_spin_node
+create rcl_wait_set
+rclc_node -> rcl_wait_set
+rclc_node <-- rcl_wait_set
+loop rcl_ok
+COMMON_SPIN()  
+end
+UA <-- rclc_node
+
+
+' Spin once
+UA -> rclc_node: rclc_spin_node_once
+create rcl_wait_set
+rclc_node -> rcl_wait_set
+rclc_node <-- rcl_wait_set
+COMMON_SPIN()
+UA <-- rclc_node
+
+
+
+== Destruction ==
+
+!definelong DESTROY(app, name)
+app -> rclc_##name: rclc_destroy_##name
+rclc_##name -> rcl_##name
+rclc_##name <-- rcl_##name
+destroy rcl_##name
+app <-- rclc_##name
+destroy rclc_##name
+!enddefinelong
+
+' Publisher destruction
+DESTROY(UA, publisher)
+' Subscription destruction
+DESTROY(UA, subscription)
+' Node destruction
+DESTROY(UA, node)
+
+
+
+@enduml

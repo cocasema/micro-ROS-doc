@@ -1,0 +1,37 @@
+@startuml
+
+Class rmw_node_t
+{
+  const char* implementation_identifier
+  void* data
+  const char* name
+  const char* namespace_
+}
+
+Class rmw_publisher_t
+{
+    const char* implementation_identifier
+    void* data
+    const char* topic_name    
+}
+
+Class rosidl_message_type_support_t
+{
+    const char* typesupport_identifier
+    void* data
+    const rosidl_message_type_support_t * (* func)(const rosidl_message_type_support_t *, const char *);
+}
+
+Class MicroNode
+{
+    udp
+    session
+    participant_id
+    publisher_id[max_publishers]
+    datawriter_id[max_datawriters]
+}
+
+rmw_node_t *-- MicroNode
+rmw_publisher_t *-- rosidl_message_type_support_t
+
+@enduml

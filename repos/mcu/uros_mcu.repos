@@ -1,0 +1,90 @@
+# List of MicroROS repositories to crosscompile into a microcontroller.
+
+repositories:
+  ros2/rcutils:
+    type: git
+    url: https://github.com/ros2/rcutils.git
+    version: 0.5.1
+  ros2/rmw:
+    type: git
+    url: https://github.com/ros2/rmw.git
+    version: 0.5.0
+  ros2/ament_cmake_ros:
+    type: git
+    url: https://github.com/ros2/ament_cmake_ros.git
+    version: 0.5.0
+  ros2/rosidl_defaults:
+    type: git
+    url: https://github.com/ros2/rosidl_defaults.git
+    version: 0.5.0
+  ros2/rosidl:
+    type: git
+    url: https://github.com/ros2/rosidl.git
+    version: 0.5.1
+  ros2/rosidl_dds:
+    type: git
+    url: https://github.com/ros2/rosidl_dds.git
+    version: 0.5.0
+  ros2/rosidl_typesupport:
+    type: git
+    url: https://github.com/ros2/rosidl_typesupport.git
+    version: 0.5.0
+  ros2/rmw_implementation:
+    type: git
+    url: https://github.com/ros2/rmw_implementation.git
+    version: 0.5.1
+  ros2/common_interfaces:
+    type: git
+    url: https://github.com/ros2/common_interfaces.git
+    version: 0.5.1
+  ros2/libyaml_vendor:
+    type: git
+    url: https://github.com/ros2/libyaml_vendor.git
+    version: 1.0.0
+  ros2/ros2cli:
+    type: git
+    url: https://github.com/ros2/ros2cli.git
+    version: 0.5.4
+
+# Changes from ROS 2.
+
+  ros2/rcl_interfaces:
+    type: git
+    url: https://github.com/ros2/rcl_interfaces.git
+    # One commit over 0.5.0 as it solves installation issues in non elevated executions.
+    version: db27f0e8619460848d80c1442f7fec0c56ee63e5
+  ros2/rclc:
+    type: git
+    url: https://github.com/microROS/rclc.git
+    version: v0.0.1-alpha
+  ros2/rcl:
+    type: git
+    url: https://github.com/microROS/rcl.git
+    # Branch with workarround for atomics operations on 64bits types.
+    version: feature/NuttX
+
+# Micro XRCE-DDS
+
+  eProsima/micro-CDR:
+    type: git
+    url: https://github.com/eProsima/Micro-CDR.git
+    version: v1.0.1
+  eProsima/micro-xrcedds-client:
+    type: git
+    url: https://github.com/eProsima/Micro-XRCE-DDS-Client.git
+    version: v1.0.1
+
+# MicroROS
+
+  uros/micro-ROS-demo:
+    type: git
+    url: https://github.com/microROS/micro-ros-demos.git
+    version: v0.0.1-alpha
+  uros/rmw-microxrcedds:
+    type: git
+    url: https://github.com/microROS/rmw-microxrcedds.git
+    version: v0.0.1-alpha
+  uros/rosidl_typesupport_microxrcedds:
+    type: git
+    url: https://github.com/microROS/rosidl_typesupport_microxrcedds.git
+    version: v0.0.1-alpha
