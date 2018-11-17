@@ -36,7 +36,7 @@ For shutting down an activate python virtual env.
 
 #### Alternative: Using docker container
 
-As an alternative to the installation of the ROS2 environment on windows, the user can download and compile a [docker](https://docs.docker.com/docker-for-windows/) image from [here](PENDING..).
+As an alternative to the installation of the ROS2 environment on windows, the user can download and compile a [docker](https://docs.docker.com/docker-for-windows/) image from [here](https://github.com/microROS/docker).
 
 ```bash
 docker build -t ros2 DOCKER_FILE_PATH
@@ -75,7 +75,7 @@ Download all client-side repo package list and place it in the client workspace.
 
 ```bash
 cd C:\C
-curl --basic https://raw.githubusercontent.com/microROS/micro-ROS-doc/feature/repos/repos/uros_minimum.repos > micro_ros.repos
+curl --basic https://raw.githubusercontent.com/microROS/micro-ROS-doc/master/repos/client_minimum.repos > micro_ros.repos
 ```
 
 Then, clone all repos.
@@ -89,7 +89,7 @@ Download all agent-side repo package list and place it in the client workspace.
 
 ```bash
 cd C:\A
-curl --basic https://raw.githubusercontent.com/microROS/micro-ROS-doc/feature/repos/repos/uros_minimum.repos > micro_ros.repos
+curl --basic https://raw.githubusercontent.com/microROS/micro-ROS-doc/master/repos/agent_minimum.repos > micro_ros.repos
 ```
 
 Then, clone all repos.
@@ -143,7 +143,7 @@ You can follow the [ROS2 installation guide for Linux.](https://index.ros.org/do
 
 #### Alternative: using docker container
 
-As an alternative to the installation of the ROS2 environment on Linux , the user can download and compile a [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/) image from [here](PENDING..).
+As an alternative to the installation of the ROS2 environment on Linux , the user can download and compile a [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/) image from [here](https://github.com/microROS/docker).
 
 ```bash
 docker build -t ros2 DOCKER_FILE_PATH
@@ -175,15 +175,13 @@ mkdir ~/agent_ws/src
 For using micro-ROS, You need a predefined group of ROS2 packages.
 A [YAML](http://yaml.org/) file for [vcstool](https://github.com/dirk-thomas/vcstool) is provided to sync all the needed sources easily.
 
-For this step you have to download a basic group of packages from [here](https://raw.githubusercontent.com/microROS/micro-ROS-doc/feature/repos/repos/uros_minimum.repos).
-Rename de downloaded file as 'micro_ros.repo' and place it in the same folder where you want to clone all the repositories.
-
+For this step you have to download a basic group of packages from.
 
 Download all client-side repo package list and place it in the client workspace.
 
 ```bash
 cd ~/client_ws
-wget https://raw.githubusercontent.com/microROS/micro-ROS-doc/feature/repos/repos/uros_minimum.repos -O micro_ros.repos
+wget https://raw.githubusercontent.com/microROS/micro-ROS-doc/master/repos/client_minimum.repos -O micro_ros.repos
 ```
 
 Then, clone all repos.
@@ -197,7 +195,7 @@ Download all agent-side repo package list and place it in the client workspace.
 
 ```bash
 cd ~/agent_ws
-wget https://raw.githubusercontent.com/microROS/micro-ROS-doc/feature/repos/repos/uros_minimum.repos -O micro_ros.repos
+wget https://raw.githubusercontent.com/microROS/micro-ROS-doc/master/repos/agent_minimum.repos -O micro_ros.repos
 ```
 
 Then, clone all repos.
