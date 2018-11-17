@@ -44,7 +44,7 @@ docker build -t ros2 DOCKER_FILE_PATH
 
 ### Step 2: create work spaces
 
-This step will create two workspaces. 
+This step will create two workspaces.
 One for the client-side and other for the agent-side.
 Client workspace will contain all Micro nodes and Agent workspace will contain all ROS2 nodes.
 For now, we have to keep separate client-side packages from Agent-side packages.
@@ -118,7 +118,7 @@ cd C:\A
 colcon build --cmake-args -DBUILD_SHARED_LIBS=ON --merge-install
 ```
 
-`Note:` To avoid the error of routes too long (due to the .NET library), the '--merge-install' flag must be set. 
+`Note:` To avoid the error of routes too long (due to the .NET library), the '--merge-install' flag must be set.
 
 
 ### Step 5: Configure execution environment on Windows
@@ -134,16 +134,16 @@ C:\A\install\local_setup.bat
 The previous batch, sets up the environment for the current cmd session.
 From now on we can run our [sample nodes](https://github.com/microROS/micro-ROS-demos/blob/master/README.md).
 
-## Linux Debian
+## Linux
 
 ### Step 1: Set-up ROS2 environment on Windows
 
 The development environment for micro-ROS in Windows platforms is the same as the one for [ROS2](https://github.com/ros2/ros2/wiki), so the same set-up is needed.
-You can follow the [ROS2 installation guide for Linux Debian.](https://index.ros.org/doc/ros2/Linux-Install-Debians/)
+You can follow the [ROS2 installation guide for Linux.](https://index.ros.org/doc/ros2/Linux-Install-Debians/)
 
 #### Alternative: using docker container
 
-As an alternative to the installation of the ROS2 environment on Linux Debian, the user can download and compile a [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/) image from [here](PENDING..).
+As an alternative to the installation of the ROS2 environment on Linux , the user can download and compile a [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/) image from [here](PENDING..).
 
 ```bash
 docker build -t ros2 DOCKER_FILE_PATH
@@ -151,7 +151,7 @@ docker build -t ros2 DOCKER_FILE_PATH
 
 ### Step 2: create work space
 
-This step will create two workspaces. 
+This step will create two workspaces.
 One for the client-side and other for the agent-side.
 Client workspace will contain all Micro nodes and Agent workspace will contain all ROS2 nodes.
 For now, we have to keep separate client-side packages from Agent-side packages.
@@ -170,12 +170,12 @@ mkdir ~/agent_ws
 mkdir ~/agent_ws/src
 ```
 
-### Step 3: import micro-ROS packages on Linux Debian
+### Step 3: import micro-ROS packages on Linux
 
 For using micro-ROS, You need a predefined group of ROS2 packages.
 A [YAML](http://yaml.org/) file for [vcstool](https://github.com/dirk-thomas/vcstool) is provided to sync all the needed sources easily.
 
-For this step you have to download a basic group of packages from [here](https://raw.githubusercontent.com/microROS/micro-ROS-doc/feature/repos/repos/uros_minimum.repos). 
+For this step you have to download a basic group of packages from [here](https://raw.githubusercontent.com/microROS/micro-ROS-doc/feature/repos/repos/uros_minimum.repos).
 Rename de downloaded file as 'micro_ros.repo' and place it in the same folder where you want to clone all the repositories.
 
 
@@ -208,7 +208,7 @@ vcs-import src < micro_ros.repos
 ```
 
 
-### Step 4: Build micro-ROS on Linux Debian
+### Step 4: Build micro-ROS on Linux
 
 Build all packages for the client workspace.
 
