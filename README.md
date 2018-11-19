@@ -32,7 +32,7 @@ In this repository you can find all the micro-ROS related documentation:
 
 * [Install and run](./docs/install_and_run.md): This is a guide on how to set up environment and run the provided examples.
 * [rclc](./docs/rclc.md): User API layer documentation and diagrams.
-* [rmw-microxrcedds](./docs/rmw-microxrcedds.md): Documentation related to the middleware layer using Micro XRCE-DDS.
+* [rmw-microxrcedds](./docs/rmw_microxrcedds.md): Documentation related to the middleware layer using Micro XRCE-DDS.
 * [type_support](./docs/type_support.md): Type support mechanism documentation.
 
 ## Dockers images
