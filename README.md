@@ -1,5 +1,7 @@
 # micro-ROS
 
+[![GitHub license](https://img.shields.io/github/license/microROS/micro-ROS-doc.svg)](https://github.com/microROS/micro-ROS-doc)
+
 micro-ROS puts ROS2 onto microcontrollers, making them first-class participants of the ROS 2 environment.
 
 micro-ROS is composed by multiple repositories:
