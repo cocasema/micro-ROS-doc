@@ -1,8 +1,12 @@
-# micro-ROS
-
 [![GitHub license](https://img.shields.io/github/license/microROS/micro-ROS-doc.svg)](https://github.com/microROS/micro-ROS-doc)
+![GitHub release](https://img.shields.io/github/release/microROS/rosidl_typesupport_microxrcedds.svg?label=last_release)
+![GitHub (pre-)release](https://img.shields.io/github/release-pre/microROS/rosidl_typesupport_microxrcedds.svg?label=pre_release)
 
-micro-ROS puts ROS2 onto microcontrollers, making them first-class participants of the ROS 2 environment.
+# Overview 
+
+[MicroROS](https://microros.github.io/micro-ROS/) is a project that aims to puts ROS2 onto microcontrollers, making them first-class participants of the ROS 2 environment. 
+This documentation is meant to help a developer to use MicroROS. 
+It will describe all the functionalities of the different packages that make it up.
 
 1. [Installation](Installation/README.md)
 1. [Quick start](Quick_start/README.md)
@@ -38,15 +42,6 @@ MicroROS is composed by multiple repositories:
     micro-ROS applications to be used along with NuttX.
 * [docker](https://github.com/microROS/docker):
     Docker-related material to set up, configure and develop with micro-ROS hardware.
-
-## Documentation
-
-In this repository you can find all the micro-ROS related documentation:
-
-* [Install and run](./docs/install_and_run.md): This is a guide on how to set up environment and run the provided examples.
-* [rclc](./docs/rclc.md): User API layer documentation and diagrams.
-* [rmw-microxrcedds](./docs/rmw_microxrcedds.md): Documentation related to the middleware layer using Micro XRCE-DDS.
-* [type_support](./docs/type_support.md): Type support mechanism documentation.
 
 ## Dockers images
 
