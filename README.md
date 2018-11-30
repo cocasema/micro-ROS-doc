@@ -1,5 +1,7 @@
 # micro-ROS
 
+[![GitHub license](https://img.shields.io/github/license/microROS/micro-ROS-doc.svg)](https://github.com/microROS/micro-ROS-doc)
+
 micro-ROS puts ROS2 onto microcontrollers, making them first-class participants of the ROS 2 environment.
 
 micro-ROS is composed by multiple repositories:
@@ -32,10 +34,17 @@ In this repository you can find all the micro-ROS related documentation:
 
 * [Install and run](./docs/install_and_run.md): This is a guide on how to set up environment and run the provided examples.
 * [rclc](./docs/rclc.md): User API layer documentation and diagrams.
-* [rmw-microxrcedds](./docs/rmw-microxrcedds.md): Documentation related to the middleware layer using Micro XRCE-DDS.
+* [rmw-microxrcedds](./docs/rmw_microxrcedds.md): Documentation related to the middleware layer using Micro XRCE-DDS.
 * [type_support](./docs/type_support.md): Type support mechanism documentation.
 
 ## Dockers images
+
+### microros/linux
+
+[![Docker Automated build](https://img.shields.io/docker/automated/microros/linux.svg?logo=docker)](https://hub.docker.com/r/microros/linux/)
+[![Docker Build Status](https://img.shields.io/docker/build/microros/linux.svg?logo=docker)](https://hub.docker.com/r/microros/linux/)
+
+[![Compare Images](https://images.microbadger.com/badges/image/microros/linux.svg)](https://microbadger.com/images/microros/linux)
 
 ### microros/stm32-e407
 
