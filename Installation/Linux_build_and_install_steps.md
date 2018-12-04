@@ -1,17 +1,127 @@
 # Linux build and install steps
 
-## Step 1: Set-up ROS2 development environment
+## Step 1 (Option A): Install ROS2 development environment
 
-The development environment for Micro-ROS in Windows platforms is the same as the one for [ROS2](https://github.com/ros2/ros2/wiki), so the same set-up is needed.
-You can follow the [ROS2 installation guide for Linux.](https://index.ros.org/doc/ros2/Linux-Install-Debians/)
+The development environment for Micro-ROS in Linux platforms is the same as the one for [ROS2](https://github.com/ros2/ros2/wiki), so the same set-up is needed.
+All required tool that is going to be intalled in this step is been extracted from the [ROS2 istallation guide](https://index.ros.org/doc/ros2/Linux-Install-Debians/).
 
-### Alternative: Using docker container to isolate ROS2 development environment
+1. Upgrade apt.
+    ``` 
+    apt update
+    apt upgrade -y
+    ```
 
-As an alternative to the installation of the ROS2 environment on Linux , the user can download and compile a [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/) image from [here](https://github.com/microROS/docker).
+1. Install first required packages.
+    ```shell
+    apt install -y  wget \
+                    curl \
+                    gnupg \
+                    gnupg2 \
+                    lsb-core \
+                    locales
+    ```
+
+1. Add ROS2 repo key.
+    ```
+    wget http://repo.ros2.org/repos.key 
+    apt-key add repos.key 
+    rm repos.key 
+    sh -c 'echo "deb [arch=amd64,arm64] http://repo.ros2.org/ubuntu/main `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list'
+    ```
+
+1. Configure locale.
+    ```
+    locale-gen en_US en_US.UTF-8 
+    update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 
+    export  LANG='en_US.UTF-8' \
+            LANGUAGE='en_US:en' \
+            LC_ALL='en_US.UTF-8' \
+            DEBIAN_FRONTEND=noninteractive
+    ```
+
+1. Install essential required apt packages for ROS2.
+    ```bash
+    apt update
+    apt install -y  build-essential \
+                    cmake \
+                    git \
+                    python3-colcon-common-extensions \
+                    python3-pip \
+                    python-rosdep \
+                    python3-vcstool \
+                    clang-tidy
+    ```
+
+1. Install essential required python packages for ROS2.
+    ```bash 
+    python3 -m pip install --upgrade pip
+    python3 -m pip install -U   argcomplete \
+                                flake8 \
+                                flake8-blind-except \
+                                flake8-builtins \
+                                flake8-class-newline \
+                                flake8-comprehensions \
+                                flake8-deprecated \
+                                flake8-docstrings \
+                                flake8-import-order \
+                                flake8-quotes \
+                                pytest \
+                                pytest-cov \
+                                pytest-runner \
+                                pytest-repeat \
+                                pytest-rerunfailures \
+                                setuptools \
+                                mock \
+                                git+https://github.com/lark-parser/lark.git@0.7b
+    ```
+
+
+
+1. Install asio (for fastrtps)
+    ```
+    apt install --no-install-recommends -y \
+        libasio-dev \
+        libtinyxml2-dev
+    ```
+
+1. Install miscellanius required apt packages for ROS2 last release repos.
+    ```
+    apt install -y  libpcre3 \
+                    libpcre3-dev \
+                    zlibc \
+                    zlib1g \
+                    zlib1g-dev \
+                    xorg \
+                    openbox \
+                    libxaw7-dev \
+                    libfreetype6-dev \
+                    libglu1-mesa-dev freeglut3-dev mesa-common-dev \
+                    qt5-default \
+                    libogre-1.9-dev \
+                    libxrandr-dev \
+                    libopencv-dev \
+                    libcurl4-openssl-dev
+    ```
+
+1. Install eigen lib
+    ```
+    wget http://bitbucket.org/eigen/eigen/get/3.3.5.tar.bz2 -O eigen.tar.bz2
+    tar -jxvf  eigen.tar.bz2 --one-top-level=eigen
+    (cd eigen/* && mkdir build && cd build && cmake .. && make && make install)
+    rm eigen eigen.tar.bz2 -rf
+    ```
+
+## Step 1 (Option B): Using docker container with a ROS2 development environment.
+
+As an alternative to the installation of the ROS2 development environment on Linux, the user can pull a [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/) image direcly from [dockerhub](https://hub.docker.com/).
+Docker container offers an isolated ROS2 development environment.
 
 ```bash
-docker build -t ros2 DOCKER_FILE_PATH
+docker pull microros/linux
 ```
+[![Docker Automated build](https://img.shields.io/docker/automated/microros/linux.svg?logo=docker)](https://hub.docker.com/r/microros/linux/)
+[![Docker Build Status](https://img.shields.io/docker/build/microros/linux.svg?label=Last%20build)](https://hub.docker.com/r/microros/linux/)
+[![Compare Images](https://images.microbadger.com/badges/image/microros/linux.svg)](hhttps://hub.docker.com/r/microros/linux/)
 
 ## Step 2: Create work space
 
