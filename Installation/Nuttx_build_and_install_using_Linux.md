@@ -115,7 +115,7 @@ To build a binary file that is going to be flashed on the microcontroller board 
 > **Note:** At this moment, the Olimex E407 board is the only board tested.
 
 
-## Steps 1,2 and 3 (Option B): Using docker container with a ROS2-Nuttx development environment.
+## Steps 1,2 & 3 (Option B): Using docker container with a ROS2-Nuttx development environment.
 
 As an alternative to the installation of the ROS2 and Nuttx development environments on Linux, the creation of the workspaces and the binary build process the user can pull a [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/) image direcly from [dockerhub](https://hub.docker.com/r/microros/stm32-e407/) and use it to execute only the flashing to board step.
 
