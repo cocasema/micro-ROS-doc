@@ -1,6 +1,6 @@
 # Windows build and install steps
 
-## Step 1: Set-up ROS2 development environment
+## Step 1 (Option A): Set-up ROS2 development environment
 
 The development environment for Micro-ROS in Windows platforms is the same as the one for [ROS2](https://github.com/2/ros2/wiki), so the same set-up is needed.
 You can follow the [ROS2 installation guide for windows.](https://index.ros.org/doc/ros2/Windows-Install-Binary/)
@@ -27,9 +27,10 @@ Each time you want to work on Micro-ROS, you merely need to run ```VIRTUAL_ENV_L
 For shutting down an activate python virtual env.
 
 
-### Alternative: Using docker container to isolate ROS2 development environment
+## Step 1 (Option B): Using docker container with a ROS2 development environment.
 
-As an alternative to the installation of the ROS2 environment on windows, the user can download and compile a [docker](https://docs.docker.com/docker-for-windows/) image from [here](https://github.com/microROS/docker).
+As an alternative to the installation of the ROS2 development environment on Windows, the user can download and compile a [docker](https://docs.docker.com/docker-for-windows/) image from [here](https://github.com/microROS/docker).
+Docker container offers an isolated ROS2 development environment.
 
 ```bash
 docker build -t ros2 DOCKER_FILE_PATH
