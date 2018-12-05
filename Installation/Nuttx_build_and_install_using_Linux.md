@@ -91,12 +91,13 @@ To create the work spaces execute the below commands:
     (cd ~/uros_build_ws && colcon build --symlink-install --cmake-args -DBUILD_TESTING=OFF)
     ```
 
-1. Download `Micro-ROS` source and ignore micro-ROS-demos.
+1. Download `Micro-ROS` source, ignore micro-ROS-demos and change to serial mode.
     ```bash
     mkdir -p ~/uros_ws/src 
     wget https://raw.githubusercontent.com/microROS/micro-ROS-doc/master/repos/mcu/uros_mcu.repos -O ~/uros_ws/uros_mcu.repos 
     vcs import ~/uros_ws/src < ~/uros_ws/uros_mcu.repos
     touch ~/uros_ws/src/uros/micro-ROS-demo/COLCON_IGNORE
+    sed -i s/"CONFIG_MICRO_XRCEDDS_TRANSPORT=.*"/"CONFIG_MICRO_XRCEDDS_TRANSPORT=serial"/g ~/uros_ws/src/uros/rmw-microxrcedds/rmw_microxrcedds_c/rmw_microxrcedds.config
     ```
 
 > **Note:** micro-ROS-demos are not supported yet.
