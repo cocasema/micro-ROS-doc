@@ -136,12 +136,15 @@ docker run --rm -it --net=host -p 4444 -p 3333 -v /dev/bus/usb:/dev/bus/usb --pr
 
 ## step 4: Flashing binary into the stm32-e407
 
-To write the created binary into the stm32-e407 board connect the JTAG Debugger with the board and the pc and execute the below command.
+To write the created binary into the [stm32-e407 board](https://www.olimex.com/Products/ARM/ST/STM32-E407/open-source-hardware) connect the [JTAG ARM-USB-TINY-H](https://www.olimex.com/Products/ARM/JTAG/ARM-USB-TINY-H/) with the board and the pc and execute the below command.
 
 ```bash
 cd ~/nuttx
 openocd -f interface/ftdi/olimex-arm-usb-tiny-h.cfg -f target/stm32f4x.cfg -c init -c "reset halt" -c "flash write_image erase nuttx.bin 0x08000000"
 ```
+
+> **Note:** You may have to hold press the reset button for a little while in order to start the board bootloader and make possible the flash process.
+Read [stm32-e407 board manual](https://www.olimex.com/Products/ARM/ST/STM32-E407/resources/STM32-E407.pdf) to have more detailed information about the flashing process.
 
 ## Notes
 
