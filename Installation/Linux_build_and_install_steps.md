@@ -133,15 +133,13 @@ For now, we have to keep separate client-side packages from Agent-side packages.
 For client-side workspace create an empty folder and inside it, you have to create an empty folder for the sources files named 'src'.
 
 ```bash
-mkdir ~/client_ws
-mkdir ~/client_ws/src
+mkdir -p ~/client_ws/src
 ```
 
 For agent-side workspace create an empty folder and inside it, you have to create an empty folder for the sources files named 'src'.
 
 ```bash
-mkdir ~/agent_ws
-mkdir ~/agent_ws/src
+mkdir -p ~/agent_ws/src
 ```
 
 ## Step 3: Import Micro-ROS packages
@@ -193,7 +191,7 @@ Build all packages for the agent workspace.
 
 ```bash
 cd ~/agent_ws
-colcon build --cmake-args -DBUILD_SHARED_LIBS=ON
+colcon build
 ```
 
 
