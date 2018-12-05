@@ -10,14 +10,14 @@ All steps are executed in a Linux terminal.
     wget https://github.com/microROS/docker/blob/feature/micro-ROS/linux/Dockerfile -O Dockerfile
     sudo docker build -t ros2 .
     ```
-    *`Note:` For this step superuser privileges are required.*
+     >**Note:** For this step superuser privileges are required.
 
 1. **Run docker container for agent-side applications**
 
     ```shell
     sudo docker run -it --rm --name agent_docker ros2
     ```
-    *`Note:` For this step superuser privileges are required.*
+     >**Note:** For this step superuser privileges are required.*
 
 1. **Download Agent-side repos**
 
@@ -46,7 +46,7 @@ All steps are executed in a Linux terminal.
     ```shell
     sudo docker run -it --rm --name client_docker ros2
     ```
-    *`Note:` For this step superuser privileges are required.*
+     >**Note:** For this step superuser privileges are required.
 
 1. **Download Client-side repos**
 
@@ -75,7 +75,7 @@ All steps are executed in a Linux terminal.
     ```shell
     sudo docker  exec -it client_docker bash
     ```
-    *`Note:` For this step superuser privileges are required.*
+     >**Note:** For this step superuser privileges are required.*
 
 1. **Run subscription**
 
@@ -83,7 +83,6 @@ All steps are executed in a Linux terminal.
     cd $HOME/uros_ws/install/string_subscriber_c/lib/string_subscriber_c
     ./string_subscriber_c
     ```
-
 
 After this steps you will see how publisher and subscriber share messages.
 You may open as many publisher or/and subscriber as you want.

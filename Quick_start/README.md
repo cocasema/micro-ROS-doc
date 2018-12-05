@@ -14,7 +14,7 @@ This exercice is available for:
 
 - [Windows](Windows_quick_start.md)
 - [Linux](Linux_quick_start.md)
-
+- [Nuttx (Linux)](Nuttx_Linux_quick_start.md)
 
 ## Requirements
 
