@@ -4,10 +4,10 @@ For this quick start an example of how a publisher Micro node running in an olim
 
 ## Micro-ROS Agent (Linux side)
 
-1. **Build ROS2 - Quick start Agent docker image**
+1. **Pull ROS2 - Quick start Agent docker image**
 
     ```shell
-    sudo docker build -t ros2_qsa . 
+    sudo docker pull qeyup/ros2_quickstart_agent
     ```
 
     > **Note:** Skip this step if you already have installed the 'ROS2 - Quick start Agent' from a previous start guide.
@@ -17,7 +17,7 @@ For this quick start an example of how a publisher Micro node running in an olim
 1. **Run 'ROS2  - Quick start Agent' docker container and execute Micro-ROS Agent for a serial transport**
 
     ```shell
-    sudo docker run -it --rm --privileged --net=host ros2_qsa
+    sudo docker run -it --rm --privileged --net=host ros2_quickstart_agent
     (LAST_PLUGGED_DEV=$(dmesg | grep "converter now attached" | tail -c 8) && uros_agent serial /dev/$LAST_PLUGGED_DEV)
     ```
 
@@ -32,7 +32,7 @@ For this quick start an example of how a publisher Micro node running in an olim
 1. **Run 'ROS2  - Quick start Agent' docker container and execute Micro-ROS Agent for a udp transport**
 
     ```shell
-    sudo docker run -it --rm --privileged --net=host ros2_qsa
+    sudo docker run -it --rm --privileged --net=host ros2_quickstart_agent
     uros_agent udp 8888
     ```
 
@@ -40,10 +40,10 @@ For this quick start an example of how a publisher Micro node running in an olim
 
 ## Micro-ROS Client (Linux side)
 
-1. **Build ROS2 - Quick start Agent docker image**
+1. **Pull ROS2 - Quick start Client docker image**
 
     ```shell
-    sudo docker build -t ros2_qsc . 
+    sudo docker pull qeyup/ros2_quickstart_client
     ```
 
     > **Note:** Skip this step if you already have installed the 'ROS2 - Quick start client' from a previous start guide.
@@ -53,7 +53,7 @@ For this quick start an example of how a publisher Micro node running in an olim
 1. **Run 'ROS2  - Quick start Client' docker container and run an Subscriber**
 
     ```shell
-    sudo docker run -it --rm --net=host ros2_qsc
+    sudo docker run -it --rm --net=host ros2_quickstart_client
     int32_subscriber_c
     ```
 
@@ -61,17 +61,17 @@ For this quick start an example of how a publisher Micro node running in an olim
 
 ## Micro-ROS Client (Nuttx side)
 
-1. **Build ROS2&Nuttx - Quick start stm32-e407 docker image**
+1. **Pull ROS2&Nuttx - Quick start stm32-e407 docker image**
 
     ```shell
-    sudo docker build -t ros2_nuttx_stm32-e407 .
+    sudo docker pull qeyup/ros2-nuttx_quickstart_stm32-e407
     ```
     > **Note:** For this step superuser privileges are required.
 
 1. **Run docker container for agent-side applications**
 
     ```shell
-    sudo docker run --rm -it --net=host -p 4444 -p 3333 -v /dev/bus/usb:/dev/bus/usb --privileged ros2_nuttx_stm32-e407:16.04
+    sudo docker run --rm -it --net=host -p 4444 -p 3333 -v /dev/bus/usb:/dev/bus/usb --privileged ros2-nuttx_quickstart_stm32-e407
     ```
      >**Note:** For this step superuser privileges are required.*
 
