@@ -52,12 +52,14 @@
     To write the created binary into the [stm32-e407 board](https://www.olimex.com/Products/ARM/ST/STM32-E407/open-source-hardware) connect the [JTAG ARM-USB-TINY-H](https://www.olimex.com/Products/ARM/JTAG/ARM-USB-TINY-H/) with the board and the pc and execute the below command.
 
     ```bash
-    cd ~/nuttx
-    openocd -f interface/ftdi/olimex-arm-usb-tiny-h.cfg -f target/stm32f4x.cfg -c init -c "reset halt" -c "flash write_image erase nuttx.bin 0x08000000"
+    (cd ~/nuttx && openocd -f interface/ftdi/olimex-arm-usb-tiny-h.cfg -f target/stm32f4x.cfg -c init -c "reset halt" -c "flash write_image erase nuttx.bin 0x08000000")
     ```
 
     > **Note:** You may have to hold press the reset button for a little while in order to start the board bootloader and make possible the flash process.
     Read [stm32-e407 board manual](https://www.olimex.com/Products/ARM/ST/STM32-E407/resources/STM32-E407.pdf) to have more detailed information about the flashing process.
+
+    >**Note:** After the stdout: "wrote *X* bytes from file nuttx.bin in *X*s (*X* KiB/s)" is shown, a debugger server is started.
+    The Debugger server is not necesay so you may close it (press ctrl + c).
 
 ## Notes
 
