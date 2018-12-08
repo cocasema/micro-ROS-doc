@@ -97,7 +97,8 @@
                     libogre-1.9-dev \
                     libxrandr-dev \
                     libopencv-dev \
-                    libcurl4-openssl-dev
+                    libcurl4-openssl-dev \
+                    libcurlpp-dev
     ```
 
 1. **Install eigen lib**
