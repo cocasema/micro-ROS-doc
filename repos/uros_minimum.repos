@@ -79,8 +79,8 @@ repositories:
     version: 1.0.0
   ros2/rclcpp:
     type: git
-    url: https://github.com/ros2/rclcpp.git
-    version: 0.5.1
+    url: https://github.com/microROS/rclcpp.git
+    version: cbg-executor-0.5.1
 
 # Changes from ROS 2
 
@@ -139,4 +139,3 @@ repositories:
     type: git
     url: https://github.com/microROS/micro-ROS-Agent.git
     version: v0.0.1-alpha
-
