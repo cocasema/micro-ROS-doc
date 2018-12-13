@@ -2,47 +2,50 @@ This document wants to be a small guideline for rapidly start using
 the defconfig files we at ALR have updated. This `.defconfig` uses the
 NuttX version 7.26.
 
-Available example list
+# Available example list
 
-# Olimex STM32-E407
+## Olimex STM32-E407
 
-- NSH
+- NSH over USB
 - NSH over UART
-- BMP180
-- HIH6130
+- BMP180 through I2C
+- HIH6130 through I2C
 - TCP echo
 - UDP Echo
 - ADC
 - Telemetry
 - Power Manager
 - SD Card
-- MRF24J40-6LowPan
-- microXRCEDDS
+- MRF24J40-6LowPan through SPI
+- Micro XRCE-DDS through serial
 
 
-# STM32L Discovery
+## STM32L Discovery
 
-- NSH
-- BMP180
-- HIH6130
+- NSH through UART
+- BMP180 through I2C
+- HIH6130 through I2C
 - Power Manager
-- microXRCEDDS
+- Micro XRCE-DDS through serial
 
 
-### Repository to be used
+# Repositories to be used
 
 For the examples listed below, please make use of the branch called `master` for NuttX folder, found at [GitHub](https://github.com/microROS/Nuttx), and the `master` [GitHub branch](https://github.com/microROS/apps) for the apps folder. Pull the branches in case you are working under the provided Dockerfiles.
 
 ----------------------
-# How to configure and flash a board.
-We developed two scripts that will help you to configure and flash the board easily.
-Go to the `NuttX` folder and write the next commands:
+
+# How to configure and flash a board
+
+We have developed two scripts that will help you to configure and flash the board easily. Go to the `NuttX` folder and write the next commands:
+
 - To configure: `./scripts/configure.sh <board_model> <example_to_set>`
-- Compile: `make`
-- Flash: `./scripts/flash.sh <board_model>`
+- To compile: `make`
+- To flash: `./scripts/flash.sh <board_model>`
 
 The configuration script will clean the previous project and set the new configuration.
-The flash script will execute the proper command to upload to the board and execute and `OpenOCD` giving you the chance to debug the MCU.
+
+The flash script will execute the proper command to upload the firmware to the board and execute it. The use of `OpenOCD` gives you the chance to debug the MCU.
 
 # How to execute NSH under STM32L Discovery
 
