@@ -7,7 +7,7 @@ For this quick start an example of how a publisher Micro node running in an olim
 1. **Pull ROS2 - Quick start Agent docker image**
 
     ```shell
-    sudo docker pull qeyup/ros2_quickstart_agent
+    sudo docker pull microros/agent_linux
     ```
 
     > **Note:** Skip this step if you already have installed the 'ROS2 - Quick start Agent' from a previous start guide.
@@ -43,7 +43,7 @@ For this quick start an example of how a publisher Micro node running in an olim
 1. **Pull ROS2 - Quick start Client docker image**
 
     ```shell
-    sudo docker pull qeyup/ros2_quickstart_client
+    sudo docker pull microros/client_linux
     ```
 
     > **Note:** Skip this step if you already have installed the 'ROS2 - Quick start client' from a previous start guide.
@@ -64,7 +64,7 @@ For this quick start an example of how a publisher Micro node running in an olim
 1. **Pull ROS2&Nuttx - Quick start stm32-e407 docker image**
 
     ```shell
-    sudo docker pull qeyup/ros2-nuttx_quickstart_stm32-e407
+    sudo docker pull microros/client_stm32-e407
     ```
     > **Note:** For this step superuser privileges are required.
 

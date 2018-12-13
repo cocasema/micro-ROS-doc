@@ -7,7 +7,7 @@ All steps are executed in a Windows cmd terminal.
     ```cmd
     md %HOME%\Download\MicroROS_Docker
     cd %HOME%\Download\MicroROS_Docker
-    curl --basic https://raw.githubusercontent.com/microROS/docker/feature/micro-ROS/windows/Dockerfile > Dockerfile
+    curl --basic https://raw.githubusercontent.com/microROS/docker/master/windows/Dockerfile > Dockerfile
     docker build -t ros2 .
     ```
      >**Note:** If you dont have curl installed, you may [download](https://github.com/microROS/docker/tree/feature/micro-ROS/windows) the Dockerfile directly from the github, place it in %HOME%\Download\MicroROS_Docker and execute the docker build.

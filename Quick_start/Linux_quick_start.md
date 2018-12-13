@@ -5,10 +5,7 @@ All steps are executed in a Linux terminal.
 1. **Build Linux docker image**
 
     ```shell
-    mkdir -p $HOME/Download/MicroROS_Docker
-    cd $HOME/Download/MicroROS_Docker
-    wget https://github.com/microROS/docker/blob/feature/micro-ROS/linux/Dockerfile -O Dockerfile
-    sudo docker build -t ros2 .
+    sudo docker pull microros/linux
     ```
      >**Note:** For this step superuser privileges are required.
 
