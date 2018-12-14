@@ -944,10 +944,10 @@ First we need to configure, compile and upload the firmware:
 
 - `./scripts/configure.sh olimex-stm32-e407 mrf24j40-6lowpan`
 
-Compile:
+To compile:
 - `make`
 
-Upload:
+To upload:
 - `./scripts/flash.sh olimex-stm32-e407`
 
 For this demo it's only necessary to connect a mini-USB cable to the USB-OTG 1 port, to see the console.
@@ -958,3 +958,76 @@ Once you run the console, you should see this apps:
 If you execute the application typing `adc_simple`, you will see a mesaure of the A1 pin every 100ms like in the image:
 
 ![image](imgs/adc_measure.png)
+
+
+# How to use  microROS demo:
+
+In this demo, we will use the alpha version of microROS for NuttX running under the Olimex-STM32-E407 board.
+With board running this demo we could create a ROS2 publisher or a ROS2 subscriber.
+The publisher will create an publish as a topic a progressive count of integers (From 0 to 1000).
+The subscriber will subscribe to that topic and will show the value of the number published.
+
+This demo is a little bit different as the other demo because we need to follow another path to configure it.
+We need to download the docker files of microROS, executing the next command:
+`git clone -b features/micro-ros https://github.com/microROS/docker`
+(Note: This repository might change of location)
+
+Now it's necessary to build the docker file, so type the next command:
+`docker build -t microros_stm32f4 .`
+If everything goes right, you should run this command to start the docker:
+`docker build -t microros_stm32f4 `
+
+At this point it only left to upload the precompile firmware to the board, typing the next commands:
+`cd nuttx`
+`openocd -f interface/ftdi/olimex-arm-usb-tiny-h.cfg -f target/stm32f4x.cfg -c init -c "reset halt" -c "flash write_image erase nuttx.bin 0x08000000"`
+
+Once the firmware is ready and uploaded, you need to connect the miniUSB cable to the USB-OTG1 and connect the serial cable(TTL232) to USART3 with the next pinout:
+- `USART3 TX` -> `TTL232 RX`
+- `USART3 RX` -> `TTL232 TX`
+- `GND Board` -> `TTL232 GND`
+
+And it should look like this:
+
+![image](imgs/olimex_uxd.jpg)
+
+Now the board it's ready.
+Connect the serial cable (TTL232) to the computer and check which is the number of the serial port.
+
+Note: We need to install previosly the microROS agent. So you can follow the next guide to install it:
+https://github.com/microROS/micro-ROS-doc/blob/master/docs/install_and_run.md
+
+## Run a publisher:
+
+First you need to execute the **microROS Agent** in your computer using the next command:
+```
+cd ~/agent_ws/install/uros_agent/lib/uros_agent/
+./uros_agent serial <direction_of_serial>
+```
+
+Once you execute it should look like this:
+![image](imgs/microros_agent.png)
+
+Now execute the publisher app in the Olimex board, typing `publisher`, and should send a new value every 100mS. And will look like this:
+
+**Agent**
+![image](imgs/microros_agentattach.png)
+
+**Board publisher**
+![image](imgs/microros_pub.png)
+
+Finally, if you type in a console `ros2 topic list`, you will be able to see the topic like in the image:
+![image](imgs/microros_ros2.png)
+
+## Run a publisher:
+
+
+To run this example, you should follow the same steps as in the previous (Run a publisher), instead of run the `publisher` app, you should run `subscriber` app.
+
+If the publisher is running properly, you should see this on the board:
+![image](imgs/microros_sub.png)
+
+So as a summary:
+- With this demo, you can run a publisher or subscriber in the Olimex Board.
+- You need to run an agent for each publisher or subscriber that you want to run.
+- You can create a ROS2 subscriber in the PC and receive the topic.
+- The topic that sends this example is an integer that goes from 0 to 1000.
