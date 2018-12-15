@@ -8,26 +8,26 @@ the defconfig files for NuttX, OFERA project has created.
 ## Olimex STM32-E407
 
 - NSH over USB
-- [NSH over UART](#How_to_use_NSH_over_UART)
-- [BMP180 through I2C](#How_to_execute_BMP180_example)
-- [HIH6130 through I2C](#How_to_execute_HIH6130_example)
-- [UDP echo server](#How_to_execute_UDPEcho_server_example)
-- [TCP echo server](#How_to_execute_TCP_Echo_server_example)
-- [ADC](#How_to_use_the_ADC_demo)
-- [Telemetry](#How_to_execute_telemetry_app)
-- [Power Manager](#How_to_execute_Power_Manager_example)
-- [SD Card](#How to use a micro SD-Card in the Olimex-STM32-E407 board)
-- [MRF24J40-6LowPan through SPI](#How_to_use_MRF24j40-6LowPan)
-- [Micro XRCE-DDS through serial](#How_to_execute_Micro_XRCE-DDS)
+- [NSH over UART](#How-to-use-NSH-over-UART)
+- [BMP180 through I2C](#How-to-execute-BMP180-example)
+- [HIH6130 through I2C](#How-to-execute-HIH6130-example)
+- [UDP echo server](#How-to-execute-UDPEcho-server-example)
+- [TCP echo server](#How-to-execute-TCP-Echo-server-example)
+- [ADC](#How-to-use-the-ADC-demo)
+- [Telemetry](#How-to-execute-telemetry-app)
+- [Power Manager](#How-to-execute-Power-Manager-example)
+- [SD Card](#How-to-use-a-micro-SD-Card-in-the-Olimex-STM32-E407-board)
+- [MRF24J40-6LowPan through SPI](#How-to-use-MRF24j40-6LowPan)
+- [Micro XRCE-DDS through serial](#How-to-execute-Micro-XRCE-DDS)
 
 
 ## STM32L Discovery
 
-- [NSH through UART](#How_to_execute_NSH_under_STM32L_Discovery)
-- [BMP180 through I2C](#How to execute BMP180 example)
-- [HIH6130 through I2C](#How to execute HIH6130 example)
-- [Power Manager](#How_to_execute_Power_Manager_example)
-- [Micro XRCE-DDS through serial](#How_to_execute_Micro_XRCE-DDS)
+- [NSH through UART](#How-to-execute-NSH-under-STM32L-Discovery)
+- [BMP180 through I2C](#How-to-execute-BMP180-example)
+- [HIH6130 through I2C](#How-to-execute-HIH6130-example)
+- [Power Manager](#How-to-execute-Power-Manager-example)
+- [Micro XRCE-DDS through serial](#How-to-execute-Micro-XRCE-DDS)
 
 
 # Repositories to be used
