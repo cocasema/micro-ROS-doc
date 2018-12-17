@@ -362,115 +362,140 @@ nsh>
 ```
 
 
-# How to execute telemetry app
+# How to execute CPU performance telemetry app
 
->It is outdated, update it
+Go to the main folder of NuttX and type the next command to configure the board:
+`./scripts/configure.sh olimex-stm32-e407 telemetry`
 
-Telemetry app ables to read the current measurement using INA219, CPU load and RAM size NuttX is using. For running this example you will require the INA219 connected to the bus `I2C1`, serial cable connected to `UART3` and the Olimex flashing tool attached:
+Compile:
+`make`
 
-![img](imgs/olimex_ina.jpg)
+Upload:
+`./scripts/flash.sh olimex-stm32-e407`
 
+This print the next:
 
-First, clean the old compilations you are using:
-`$ cd nuttx`
-`$ make distclean`
+- Configuration:
+```
+Copy files
+Refreshing...
+```
+- Compilation:
+```
+CP: nuttx.hex
+CP: nuttx.bin
+```
+- Upload the firmware
+```
+wrote 131072 bytes from file nuttx.bin in 3.763846s (34.008 KiB/s)
+Info : Listening on port 6666 for tcl connections
+Info : Listening on port 4444 for telnet connections
+```
 
-Copy the `.config` file created for the example:
-`cd nuttx/tools`
-`./configure.sh olimex-stm32-e407/telemetry`
-You should see this output in the terminal:
+Once the code it's uploaded to the board, do the next:
+- Connect the mini USB cable to the USB_OTG 1 port.
+
+When you reset the board, yo should see this app:
 
 ```
-root@2ca837544dc0:~/nuttx/tools# ./configure.sh olimex-stm32-e407/telemetry
-  Copy files
-  Refreshing...
-```
-
-Finally, compile the example:
-`cd .. && make`
-
-Now upload the code to the board:
-```
-openocd -f interface/ftdi/olimex-arm-usb-tiny-h.cfg -f target/stm32f4x.cfg -c init -c "reset halt" -c "flash write_image erase nuttx.bin 0x08000000"
-```
-Once the code it's upload to the board, do the next steps:
-+ Check if the example is there, type `?`, you should see a binary called `telemetry`
-
-```
-nsh>?
+NuttShell (NSH)
+nsh> ?
 help usage:  help [-v] [<cmd>]
 
-  [           dirname     help        mh          set         unset       
-  ?           dd          hexdump     mount       sh          usleep      
-  basename    df          kill        mv          sleep       xd          
-  break       echo        ls          mw          test        
-  cat         exec        mb          ps          time        
-  cd          exit        mkdir       pwd         true        
-  cp          false       mkfatfs     rm          uname       
-  cmp         free        mkrd        rmdir       umount                                                                      
+  [           cmp         false       mkdir       rm          true        
+  ?           dirname     free        mh          rmdir       uname       
+  basename    dd          help        mount       set         umount      
+  break       df          hexdump     mv          sh          unset       
+  cat         echo        kill        mw          sleep       usleep      
+  cd          exec        ls          ps          test        xd          
+  cp          exit        mb          pwd         time        
 
-Builtin Apps:                                                                                                                 
-  telemetry                                                                                                                   
-  helloxx                                                                                                                     
-  adc_simple                                                                                                                  
-  hello
+Builtin Apps:
+  telemetry
+nsh>
 ```
 
-+ Now check its usage typing just `telemetry`:
+The App, will perform the next tests:
+## CPU Performance test:
+This test is to show the percentage of CPU usage under heavy floating operations.
+We have the variable 'e' which have the value of the first digits of Pi. So we will do the next operations 100000 times: 'e'='e'*'e'.
+This unit doesn't have a DSP unit, so the floating point operations have a high cost for the CPU.
+This test could also use as a benchmark to compare different MCUs.
 
 ```
-nsh>telemetry                                                                                                                 
-Correct: telemetry file.txt number_measures show_option                                                                       
-If you want a continue measure, write i as argument                                                                           
-The available options are:                                                                                                    
- s (to save in the sd card)                                                                                                   
-c (to see the data in the console)                                                                                            
- b (both modes)
+nsh> telemetry                                                                  
+Mounting file system                                                            
 
+Pushing the CPU to the limits                                                   
+We will do the next floating operation:                                         
+e=3.141592653589793                                                             
+e=e*e                                                                           
+This operation 100000 times                                                     
+================================================================================
+
+Max CPU load achieve:                                                           
+ 30.9%
 ```
 
-In this example, we are not going to store any file with the measurements, but we need to type it.
-Execute the next command:  `telemetry file.txt 10 c` to see 10 reads in the console.
-The output should be something like this:
+## Show the interruptions raised internally:
+
+This show the interruption raised internally, the ID of the interruption if it has any argument and the number of times raised.
+```
+Showing interruptions                                                           
+
+IRQ HANDLER  ARGUMENT    COUNT    RATE                                          
+  3 080009cd 00000000         27    3.400                                       
+ 15 080035e1 00000000        794  100.000                                       
+ 83 080042c9 00000000       3314  417.380
+```
+
+## Memory usage test:
+
+This test will show the usage of the RAM memory. If you want to calculate the RAM that has been used, you can do the next calculus:
+192K- free/1024 = Used RAM.
+```
+Memory ussage                                                                   
+
+             total       used       free    largest                             
+Umem:       190800      16192     174608     123072  
+```
+
+## Stack info of the App:
 
 ```
-nsh>telemetry file.txt 10 c                                                                                                   
-nsh: mount: mount failed: 19                                                                                                  
-Starting telemetry SD                                                                                                         
-V: 1028000 mV I: 4294966496 mA CPU:   0.01000235516tal       used       free    largest                                       
-Umem:       127072      17088     109984     105968                                                                           
-�tK��Q Free SRAM: 109984 Bytes                                                                                                
-V: 1024000 mV I: 4294966496 mA CPU:   0.01000235516tal       used       free    largest                                       
-Umem:       127072      17088     109984     105968                                                                           
-�tK�����Q Free SRAM: 109984 Bytes                                                                                             
-V: 1028000 mV I: 4294966696 mA CPU:   0.01000235516tal       used       free    largest                                       
-Umem:       127072      17088     109984     105968                                                                           
-�tK��Q Free SRAM: 109984 Bytes                                                                                                
-V: 1024000 mV I: 4294966396 mA CPU:   0.01000235516tal       used       free    largest                                       
-Umem:       127072      17088     109984     105968                                                                           
-�tK�����Q Free SRAM: 109984 Bytes                                                                                             
-V: 1024000 mV I: 4294966296 mA CPU:   0.01000235516tal       used       free    largest                                       
-Umem:       127072      17088     109984     105968                                                                           
-�tK��Q Free SRAM: 109984 Bytes                                                                                                
-V: 1024000 mV I: 4294966896 mA CPU:   0.01000235516tal       used       free    largest                                       
-Umem:       127072      17088     109984     105968                                                                           
-�tK�����Q Free SRAM: 109984 Bytes                                                                                             
-V: 1024000 mV I: 4294966596 mA CPU:   0.01000235516tal       used       free    largest                                       
-Umem:       127072      17088     109984     105968                                                                           
-�tK��Q Free SRAM: 109984 Bytes                                                                                                
-V: 1028000 mV I: 4294966496 mA CPU:   0.01000235516tal       used       free    largest                                       
-Umem:       127072      17088     109984     105968                                                                           
-�tK�����Q Free SRAM: 109984 Bytes                                                                                             
-V: 1024000 mV I: 4294966696 mA CPU:   0.01000235516tal       used       free    largest                                       
-Umem:       127072      17088     109984     105968                                                                           
-�tK��Q Free SRAM: 109984 Bytes                                                                                                
-V: 1028000 mV I: 4294966796 mA CPU:   0.01000235516tal       used       free    largest                                       
-Umem:       127072      17088     109984     105968                                                                           
-�tK�����Q Free SRAM: 109984 Bytes
+Stack of the application                                                        
+
+StackBase:  0x10003110                                                          
+StackSize:  2004  
 ```
-*Note: It is not required to add SD card to run the example. But you can add it and create a logfile*
-*Note: Current and Voltage measurements are weird because I haven't attached anything*
-*Note: This test needs improvements*
+
+## Info of a running App:
+In this last test, you can see the priority of an App, the scheduling algorithm, what it is (a task or a thread) and the state:
+```
+Status of the running task                                                      
+
+Name:       popen                                                               
+Type:       Task                                                                
+State:      Running                                                             
+Flags:      ---                                                                 
+Priority:   100                                                                 
+Scheduler:  SCHED_RR                                                            
+SigMask:    00000000   
+```
+
+If you run this command: `cat /proc/self/status `, you will see that the task has changed, and scheduling algorithm.
+```
+nsh> cat /proc/self/status                                                      
+Name:       init                                                                
+Type:       Task                                                                
+State:      Running                                                             
+Flags:      ---                                                                 
+Priority:   100                                                                 
+Scheduler:  SCHED_FIFO                                                          
+SigMask:    00000000  
+```
+
+
 
 ## How to execute UDP Echo server example
 
