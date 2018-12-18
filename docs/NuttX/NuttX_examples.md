@@ -7,7 +7,7 @@ the defconfig files for NuttX, OFERA project has created.
 
 ## Olimex STM32-E407
 
-- NSH over USB
+- [NSH over USB](#How-to-execute-NSH-over-USB-under-Olimex-STM32-E407)
 - [NSH over UART](#How-to-use-NSH-over-UART)
 - [BMP180 through I2C](#How-to-execute-BMP180-example)
 - [HIH6130 through I2C](#How-to-execute-HIH6130-example)
@@ -55,11 +55,115 @@ The flash script will execute the proper command to upload the firmware to the b
 
 This section provides step-by-step tutorials so you can start executing the examples we have created. These tutorials starts using NuttX, using many different peripherals and tools, and ends up showing how to execute Micro XRCE-DDS client and micro-ROS client.
 
-## How to execute NSH under STM32L Discovery
+## How to execute NSH over USB under Olimex-STM32-E407
 
 >Explain what is NSH, short
 >Change of place or add the Olimex here also (USB and UART)
 
+Go to the main folder of NuttX and execute the next command to configure the board:
+`./scripts/configure.sh olimex-stm32-e407 nsh`
+
+This script will clean NuttX and set the configuration that we need. You should see something like this at the end of process at the terminal.
+
+```
+  Copy files
+  Refreshing...
+```
+
+Once the board is configured, the next step will be to compile the firmware:
+Type `make` and you should see something like this when it finishes in the terminal:
+```
+CP: nuttx.hex
+CP: nuttx.bin
+```
+
+Now it's ready for uploading the firmware into the board, so plug the micro USB cable an type the next command:
+`./scripts/flash.sh olimex-stm32-e407`
+
+If everything goes right, the loader will return the next message:
+```
+wrote 49152 bytes from file nuttx.bin in 6.279262s (7.644 KiB/s)
+Info : Listening on port 6666 for tcl connections
+Info : Listening on port 4444 for telnet connections
+```
+
+Connect the mini USB cable to the USB OTG1
+
+>Modify the image to an Olimex usb image
+![img](imgs/l1.jpg)
+
+Open a new terminal and use a serial client, i.e. `minicom` to open the serial port, `sudo minicom -D /dev/ttyACM0`. Once done, you should be able to see how `NSH` pops up when pressing key:
+
+```
+nsh>
+nsh>
+nsh>
+nsh> ?
+help usage:  help [-v] [<cmd>]
+
+  ?           exec        hexdump     mb          sleep       
+  cat         exit        kill        mh          usleep      
+  echo        help        ls          mw          xd          
+
+Builtin Apps:
+nsh>
+```
+If you don't know which interface is the micro USB, type `dmesg` command at a terminal, this command should let you know which is the last USB device that has been connected to your computer and at what interface is attached.
+
+## How to execute NSH with the UART.
+
+>Explain what is NSH, short
+>Change of place or add the Olimex here also (USB and UART)
+### Olimex-STM32-E407
+Go to the main folder of NuttX and execute the next command to configure the board:
+`./scripts/configure.sh olimex-stm32-e407 nsh_uart`
+
+This script will clean NuttX and set the configuration that we need. You should see something like this at the end of process at the terminal.
+
+```
+  Copy files
+  Refreshing...
+```
+Once the board is configured, the next step will be to compile the firmware:
+Type `make` and you should see something like this when it finishes in the terminal:
+```
+CP: nuttx.hex
+CP: nuttx.bin
+```
+Now it's ready for uploading the firmware into the board, so plug the micro USB cable an type the next command:
+`./scripts/flash.sh olimex-stm32-e407`
+
+If everything goes right, the loader will return the next message:
+```
+wrote 49152 bytes from file nuttx.bin in 6.279262s (7.644 KiB/s)
+Info : Listening on port 6666 for tcl connections
+Info : Listening on port 4444 for telnet connections
+```
+For this demo we need to connect a USB cable to the mini USB port and a serial cable (TTL232) to the UART3 with the next pinout:
+
+- `USART3 TX` -> `TTL232 RX`
+- `USART3 RX` -> `TTL232 TX`
+- `GND Board` -> `TTL232 GND`
+
+Open a new terminal and use a serial client, i.e. `minicom` to open the serial port, `sudo minicom -D /dev/ttyUSB0`. Once done, you should be able to see how `NSH` pops up when pressing key:
+
+```
+nsh>
+nsh>
+nsh>
+nsh> ?
+help usage:  help [-v] [<cmd>]
+
+  ?           exec        hexdump     mb          sleep       
+  cat         exit        kill        mh          usleep      
+  echo        help        ls          mw          xd          
+
+Builtin Apps:
+nsh>
+```
+
+
+### STM32L1Discovery
 Go to the main folder of NuttX and execute the next command to configure the board:
 `./scripts/configure.sh stm32l1 nsh`
 
