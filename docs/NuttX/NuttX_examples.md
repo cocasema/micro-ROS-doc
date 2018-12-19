@@ -57,8 +57,8 @@ This section provides step-by-step tutorials so you can start executing the exam
 
 ## How to execute NSH over USB under Olimex-STM32-E407
 
->Explain what is NSH, short
->Change of place or add the Olimex here also (USB and UART)
+
+The NSH is a feature of the RTOS which shows a console through the interface that chooses (UART, USB or Telnet). With this console, you can see execute apps, do file operations, get information about the board. This is a demo to execute the most basic example of NuttX without any extra feature.
 
 Go to the main folder of NuttX and execute the next command to configure the board:
 `./scripts/configure.sh olimex-stm32-e407 nsh`
@@ -111,8 +111,7 @@ If you don't know which interface is the micro USB, type `dmesg` command at a te
 
 ## How to execute NSH with the UART.
 
->Explain what is NSH, short
->Change of place or add the Olimex here also (USB and UART)
+The NSH is a feature of the RTOS which shows a console through the interface that chooses (UART, USB or Telnet). With this console, you can see execute apps, do file operations, get information about the board. This is a demo to execute the most basic example of NuttX without any extra feature.
 
 ### Olimex-STM32-E407
 Go to the main folder of NuttX and execute the next command to configure the board:
@@ -220,6 +219,10 @@ If you don't know which interface is the micro USB, type `dmesg` command at a te
 
 >Shortly explain what is BMP180, add a link and a picture
 
+BMP180 is a I2C barometric pressure sensor. With this sensor you can obtain the atmospheric pressure and with that data you can calculate the altitude.
+
+<img width="300" height="300" src="imgs/bmp180.jpg">
+
 ### Olimex STM32-E407
 
 Go to the main folder of NuttX and type the command to configure the board:
@@ -317,7 +320,9 @@ Pressure: 95988
 
 ## How to execute HIH6130 example
 
->Shortly explain what is HIH6130, add a link and a picture
+The HIH6130 is humidity/temperature that works through I2C interface.
+
+<img width="300" height="350" src="imgs/hih6130.jpg">
 
 Go to the main folder of NuttX and type the command to configure the board:
 `./scripts/configure.sh olimex-stm32-e407 hih6130`
@@ -926,6 +931,8 @@ Then, we have the Olimex as subscriber, so we need to follow the same steps as w
 
 With this demo, we'll be able to create a point to point connection with the  MRF24J40 module using the protocol 6LowPan. This network, allows you to have hundreds of nodes with very little power consumption.
 One of the nodes is a TCP or UDP server, and the other nodes are TCP or UDP clients that they connect to the server.
+
+<img width="300" height="400" src="imgs/mrf24j40.jpg">
 
 Go to the main folder of NuttX and type the command to configure the board:
 `./scripts/configure.sh olimex-stm32-e407 mrf24j40-6lowpan`
