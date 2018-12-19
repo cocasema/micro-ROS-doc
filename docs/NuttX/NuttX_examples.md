@@ -633,6 +633,7 @@ With this demo, we'll be able to create a point to point connection with the  MR
 One of the nodes is a TCP or UDP server, and the other nodes are TCP or UDP clients that they connect to the server.
 
 <img width="300" height="400" src="imgs/mrf24j40.jpg">
+[mrf24j40 breakout link](https://store.digilentinc.com/pmod-rf2-ieee-802-15-rf-transceiver/)
 
 Go to the main folder of NuttX and type the command to configure the board:
 `./scripts/configure.sh olimex-stm32-e407 mrf24j40-6lowpan`
