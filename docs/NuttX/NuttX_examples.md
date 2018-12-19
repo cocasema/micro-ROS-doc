@@ -89,8 +89,7 @@ Info : Listening on port 4444 for telnet connections
 
 Connect the mini USB cable to the USB OTG1
 
->Modify the image to an Olimex usb image
-![img](imgs/l1.jpg)
+![img](imgs/olimex_nsh_usb.jpg)
 
 Open a new terminal and use a serial client, i.e. `minicom` to open the serial port, `sudo minicom -D /dev/ttyACM0`. Once done, you should be able to see how `NSH` pops up when pressing key:
 
@@ -114,6 +113,7 @@ If you don't know which interface is the micro USB, type `dmesg` command at a te
 
 >Explain what is NSH, short
 >Change of place or add the Olimex here also (USB and UART)
+
 ### Olimex-STM32-E407
 Go to the main folder of NuttX and execute the next command to configure the board:
 `./scripts/configure.sh olimex-stm32-e407 nsh_uart`
@@ -144,6 +144,9 @@ For this demo we need to connect a USB cable to the mini USB port and a serial c
 - `USART3 TX` -> `TTL232 RX`
 - `USART3 RX` -> `TTL232 TX`
 - `GND Board` -> `TTL232 GND`
+
+It should look like this:
+![img](imgs/olimex_nsh_uart.jpg)
 
 Open a new terminal and use a serial client, i.e. `minicom` to open the serial port, `sudo minicom -D /dev/ttyUSB0`. Once done, you should be able to see how `NSH` pops up when pressing key:
 
