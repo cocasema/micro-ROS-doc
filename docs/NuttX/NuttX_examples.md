@@ -14,12 +14,12 @@ the defconfig files for NuttX, OFERA project has created.
 - [UDP echo server](#How-to-execute-UDPEcho-server-example)
 - [TCP echo server](#How-to-execute-TCP-Echo-server-example)
 - [MRF24J40-6LowPan through SPI](#How-to-use-MRF24j40-6LowPan)
-- [Micro XRCE-DDS through serial](#How-to-execute-Micro-XRCE-DDS)
-- [microROS demo](#How-to-use-micro-ROS-demo)
 - [ADC](#How-to-use-the-ADC-demo)
 - [Telemetry](#How-to-execute-telemetry-app)
 - [Power Manager](#How-to-execute-Power-Manager-example)
 - [SD Card](#How-to-use-a-micro-SD-Card-in-the-Olimex-STM32-E407-board)
+- [Micro XRCE-DDS through serial](#How-to-execute-Micro-XRCE-DDS)
+- [microROS demo](#How-to-use-micro-ROS-demo)
 
 
 
@@ -730,205 +730,6 @@ To use the UDP client, we need to type the next command in the client board:
 
 Now the UDP Client, will send a `HelloWorld` to the UDP Server.
 
-## How to execute Micro XRCE-DDS
-
-In this example, we will execute Micro XRCE-DDS client in NuttX. This example runs a shape demo.
-For this demo we need two boards (It doesn't matter if it's the Olimex Board or the STM32L1), one will be the publisher which will send a topic with a shape, the color of the shape and the coordinate of the shape. The other board will subscribe to the topic.
-At this moment it's only possible to work through serial, but it could be possible to use with UDP and TCP in a future.
-
-### Olimex STM32-E407
-
-Go to the main folder of NuttX and type the command to configure the board:
-`./scripts/configure.sh olimex-stm32-e407 microxrcedds`
-
-Compile:
-`make`
-
-Upload:
-`./scripts/flash.sh olimex-stm32-e407`
-
-### STM32L Discovery
-
-Go to the main folder of NuttX and type the command to configure the board:
-`./scripts/configure.sh stm32l1 microxrcedds`
-
-Compile:
-`make`
-
-Upload the firmware:
-`./scripts/flash.sh stm32l1`
-
-In both cases it should return at the end something like this:
-- Configuration:
-```
-Copy files
-Refreshing...
-```
-- Compilation:
-```
-CP: nuttx.hex
-CP: nuttx.bin
-```
-- Upload the firmware
-```
-wrote 131072 bytes from file nuttx.bin in 3.763846s (34.008 KiB/s)
-Info : Listening on port 6666 for tcl connections
-Info : Listening on port 4444 for telnet connections
-```
-(The number of wrote bytes could be different in each board)
-
-At this point the board is ready to work, and we need to attach the next cables:
-
-### Olimex STM32-E407
-
-Connect the micro USB to the USB-OTG1 to have access to the console.
-Then we need to connect to the USART3, so follow this diagram:
-- `USART3 TX` -> `TTL232 RX`
-- `USART3 RX` -> `TTL232 TX`
-- `GND Board` -> `TTL232 GND`
-
-And it should look like this:
-![image](imgs/olimex_uxd.jpg)
-
-### STM32LDiscovery
-
-For this board we need two TTL232 cables. The first one is used to show the console.
-Connect the serial cable `RX` to pin `PA9` and `TX` to pin `PA10` and the GND wire to a `GND` pin.
-
-Then, you need to connect to the second UART to use micro-XRCE-DDS:
-Connect the serial cable `RX` to pin `PA2` and `TX` to pin `PA3` and the GND wire to a `GND` pin.
-
-And it should look like this:
-![image](imgs/l1_uxd.jpg)
-
-
-In this example, we use an Olimex board and a STM32L1 Board, but you can use any combination between STM32L1, Olimex Board and PC. Now we're going to execute the Agent in the PC.
-First, we need to check the port number of the serial cable that we want to use as Micro XRCE-DDS interface.
-Note: You must installed micro-XRCE-DDS agent previously, follow this guide -> https://micro-xrce-dds.readthedocs.io/en/latest/installation.html
-
-Open a console and type the next command:
-`MicroXRCE-DDSAgent serial <serial_port>`
-
-If you're using the Olimex Board you need to type the command in the console:
-`client --serial /dev/ttyS0`
-Otherwise, if you using the STM32LDiscovery board, you need to use this command:
-`client --serial /dev/ttyS1`
-
-Now to set a board as **Publisher**, you need to use the next commands:
-```
-create_session
-create_participant 1
-create_topic 1 1
-create_publisher 1 1
-create_datawriter 1 1
-```
-
-If you want to be **Subscriber** you need to use the next commands:
-```
-create_session
-create_participant 1
-create_topic 1 1
-create_subscriber 1 1
-create_datareader 1 1
-```
-
-To publish a topic, you need to write this command:
-```
- write_data 1 128 200 200 40 BLUE
- ```
-
-To receive a data in the subscriber, you need to write this command:
-```
-request_data 1 128 1
-```
-
-You can find more detailed information on this page:
-https://micro-xrce-dds.readthedocs.io/en/latest/index.html
-
-Important note: For each client that you want to run, you need to run an agent in PC.
-For example:
-We have the STM32L1 as publisher, so we need to check the serial port number of the Micro XRCE-DDS serial interface and run an Agent in the PC.
-Then, we have the Olimex as subscriber, so we need to follow the same steps as with the STM32L1 board.
-
-
-## How to use  micro-ROS demo:
-
-In this demo, we will use the alpha version of microROS for NuttX running under the Olimex-STM32-E407 board.
-With board running this demo we could create a ROS2 publisher or a ROS2 subscriber.
-The publisher creates and publishes as a topic a progressive count of integers (From 0 to 1000).
-The subscriber subscribes to that topic and shows the value of the number published.
-
-This demo is a little bit different as the other demos because we need to follow another path to configure it.
-We need to download the docker files of micro-ROS, executing the next command:
-`git clone -b features/micro-ros https://github.com/microROS/docker`
-(Note: This repository might change of location)
-
-Now it's necessary to build the docker file, so type the next command:
-`docker build -t microros_stm32f4 .`
-If everything goes right, you should run this command to start the docker:
-`docker build -t microros_stm32f4 `
-
-At this point it only left to upload the precompile firmware to the board, typing the next commands:
-`cd nuttx`
-`openocd -f interface/ftdi/olimex-arm-usb-tiny-h.cfg -f target/stm32f4x.cfg -c init -c "reset halt" -c "flash write_image erase nuttx.bin 0x08000000"`
-
-Once the firmware is ready and uploaded, you need to connect the miniUSB cable to the USB-OTG1 and connect the serial cable(TTL232) to USART3 with the next pinout:
-- `USART3 TX` -> `TTL232 RX`
-- `USART3 RX` -> `TTL232 TX`
-- `GND Board` -> `TTL232 GND`
-
-And it should look like this:
-
-![image](imgs/olimex_uxd.jpg)
-
-Now the board it's ready.
-Connect the serial cable (TTL232) to the computer and check which is the number of the serial port.
-
-Note: We need to install previously the microROS agent. So you can follow the next guide to install it:
-https://github.com/microROS/micro-ROS-doc/blob/master/docs/install_and_run.md
-
-## Run a publisher:
-
-First you need to execute the **microROS Agent** in your computer using the next command:
-```
-cd ~/agent_ws/install/uros_agent/lib/uros_agent/
-./uros_agent serial <direction_of_serial>
-```
-
-Once you execute it should look like this:
-
-![image](imgs/microros_agent.png)
-
-Now execute the publisher app in the Olimex board, typing `publisher`, and should send a new value every 100mS. And will look like this:
-
-**Agent**
-
-![image](imgs/microros_agentattach.png)
-
-**Board publisher**
-
-![image](imgs/microros_pub.png)
-
-Finally, if you type in a console `ros2 topic list`, you will be able to see the topic like in the image:
-
-![image](imgs/microros_ros2.png)
-
-## Run a publisher:
-
-
-To run this example, you should follow the same steps as in the previous (Run a publisher), instead of run the `publisher` app, you should run `subscriber` app.
-
-If the publisher is running properly, you should see this on the board:
-
-![image](imgs/microros_sub.png)
-
-So as a summary:
-- With this demo, you can run a publisher or subscriber in the Olimex Board.
-- You need to run an agent for each publisher or subscriber that you want to run.
-- You can create a ROS2 subscriber in the PC and receive the topic.
-- The topic that sends this example is an integer that goes from 0 to 1000.
-
-
 
 
 ## How to use the ADC demo
@@ -1162,3 +963,201 @@ Now the SD Card is ready to use. So you can use the next commands to write somet
 - See the files available: `ls /mnt`
 - Read a file: `cat /mnt/<name_of_the_file>`
 - Write or createa file: `echo "Content to write" > /mnt/name_of_your_file`
+
+## How to execute Micro XRCE-DDS
+
+In this example, we will execute Micro XRCE-DDS client in NuttX. This example runs a shape demo.
+For this demo we need two boards (It doesn't matter if it's the Olimex Board or the STM32L1), one will be the publisher which will send a topic with a shape, the color of the shape and the coordinate of the shape. The other board will subscribe to the topic.
+At this moment it's only possible to work through serial, but it could be possible to use with UDP and TCP in a future.
+
+### Olimex STM32-E407
+
+Go to the main folder of NuttX and type the command to configure the board:
+`./scripts/configure.sh olimex-stm32-e407 microxrcedds`
+
+Compile:
+`make`
+
+Upload:
+`./scripts/flash.sh olimex-stm32-e407`
+
+### STM32L Discovery
+
+Go to the main folder of NuttX and type the command to configure the board:
+`./scripts/configure.sh stm32l1 microxrcedds`
+
+Compile:
+`make`
+
+Upload the firmware:
+`./scripts/flash.sh stm32l1`
+
+In both cases it should return at the end something like this:
+- Configuration:
+```
+Copy files
+Refreshing...
+```
+- Compilation:
+```
+CP: nuttx.hex
+CP: nuttx.bin
+```
+- Upload the firmware
+```
+wrote 131072 bytes from file nuttx.bin in 3.763846s (34.008 KiB/s)
+Info : Listening on port 6666 for tcl connections
+Info : Listening on port 4444 for telnet connections
+```
+(The number of wrote bytes could be different in each board)
+
+At this point the board is ready to work, and we need to attach the next cables:
+
+### Olimex STM32-E407
+
+Connect the micro USB to the USB-OTG1 to have access to the console.
+Then we need to connect to the USART3, so follow this diagram:
+- `USART3 TX` -> `TTL232 RX`
+- `USART3 RX` -> `TTL232 TX`
+- `GND Board` -> `TTL232 GND`
+
+And it should look like this:
+![image](imgs/olimex_uxd.jpg)
+
+### STM32LDiscovery
+
+For this board we need two TTL232 cables. The first one is used to show the console.
+Connect the serial cable `RX` to pin `PA9` and `TX` to pin `PA10` and the GND wire to a `GND` pin.
+
+Then, you need to connect to the second UART to use micro-XRCE-DDS:
+Connect the serial cable `RX` to pin `PA2` and `TX` to pin `PA3` and the GND wire to a `GND` pin.
+
+And it should look like this:
+![image](imgs/l1_uxd.jpg)
+
+
+In this example, we use an Olimex board and a STM32L1 Board, but you can use any combination between STM32L1, Olimex Board and PC. Now we're going to execute the Agent in the PC.
+First, we need to check the port number of the serial cable that we want to use as Micro XRCE-DDS interface.
+Note: You must installed micro-XRCE-DDS agent previously, follow this guide -> https://micro-xrce-dds.readthedocs.io/en/latest/installation.html
+
+Open a console and type the next command:
+`MicroXRCE-DDSAgent serial <serial_port>`
+
+If you're using the Olimex Board you need to type the command in the console:
+`client --serial /dev/ttyS0`
+Otherwise, if you using the STM32LDiscovery board, you need to use this command:
+`client --serial /dev/ttyS1`
+
+Now to set a board as **Publisher**, you need to use the next commands:
+```
+create_session
+create_participant 1
+create_topic 1 1
+create_publisher 1 1
+create_datawriter 1 1
+```
+
+If you want to be **Subscriber** you need to use the next commands:
+```
+create_session
+create_participant 1
+create_topic 1 1
+create_subscriber 1 1
+create_datareader 1 1
+```
+
+To publish a topic, you need to write this command:
+```
+ write_data 1 128 200 200 40 BLUE
+ ```
+
+To receive a data in the subscriber, you need to write this command:
+```
+request_data 1 128 1
+```
+
+You can find more detailed information on this page:
+https://micro-xrce-dds.readthedocs.io/en/latest/index.html
+
+Important note: For each client that you want to run, you need to run an agent in PC.
+For example:
+We have the STM32L1 as publisher, so we need to check the serial port number of the Micro XRCE-DDS serial interface and run an Agent in the PC.
+Then, we have the Olimex as subscriber, so we need to follow the same steps as with the STM32L1 board.
+
+
+## How to use  micro-ROS demo:
+
+In this demo, we will use the alpha version of microROS for NuttX running under the Olimex-STM32-E407 board.
+With board running this demo we could create a ROS2 publisher or a ROS2 subscriber.
+The publisher creates and publishes as a topic a progressive count of integers (From 0 to 1000).
+The subscriber subscribes to that topic and shows the value of the number published.
+
+This demo is a little bit different as the other demos because we need to follow another path to configure it.
+We need to download the docker files of micro-ROS, executing the next command:
+`git clone -b features/micro-ros https://github.com/microROS/docker`
+(Note: This repository might change of location)
+
+Now it's necessary to build the docker file, so type the next command:
+`docker build -t microros_stm32f4 .`
+If everything goes right, you should run this command to start the docker:
+`docker build -t microros_stm32f4 `
+
+At this point it only left to upload the precompile firmware to the board, typing the next commands:
+`cd nuttx`
+`openocd -f interface/ftdi/olimex-arm-usb-tiny-h.cfg -f target/stm32f4x.cfg -c init -c "reset halt" -c "flash write_image erase nuttx.bin 0x08000000"`
+
+Once the firmware is ready and uploaded, you need to connect the miniUSB cable to the USB-OTG1 and connect the serial cable(TTL232) to USART3 with the next pinout:
+- `USART3 TX` -> `TTL232 RX`
+- `USART3 RX` -> `TTL232 TX`
+- `GND Board` -> `TTL232 GND`
+
+And it should look like this:
+
+![image](imgs/olimex_uxd.jpg)
+
+Now the board it's ready.
+Connect the serial cable (TTL232) to the computer and check which is the number of the serial port.
+
+Note: We need to install previously the microROS agent. So you can follow the next guide to install it:
+https://github.com/microROS/micro-ROS-doc/blob/master/docs/install_and_run.md
+
+## Run a publisher:
+
+First you need to execute the **microROS Agent** in your computer using the next command:
+```
+cd ~/agent_ws/install/uros_agent/lib/uros_agent/
+./uros_agent serial <direction_of_serial>
+```
+
+Once you execute it should look like this:
+
+![image](imgs/microros_agent.png)
+
+Now execute the publisher app in the Olimex board, typing `publisher`, and should send a new value every 100mS. And will look like this:
+
+**Agent**
+
+![image](imgs/microros_agentattach.png)
+
+**Board publisher**
+
+![image](imgs/microros_pub.png)
+
+Finally, if you type in a console `ros2 topic list`, you will be able to see the topic like in the image:
+
+![image](imgs/microros_ros2.png)
+
+## Run a publisher:
+
+
+To run this example, you should follow the same steps as in the previous (Run a publisher), instead of run the `publisher` app, you should run `subscriber` app.
+
+If the publisher is running properly, you should see this on the board:
+
+![image](imgs/microros_sub.png)
+
+So as a summary:
+- With this demo, you can run a publisher or subscriber in the Olimex Board.
+- You need to run an agent for each publisher or subscriber that you want to run.
+- You can create a ROS2 subscriber in the PC and receive the topic.
+- The topic that sends this example is an integer that goes from 0 to 1000.
