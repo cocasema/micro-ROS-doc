@@ -15,7 +15,7 @@ the defconfig files for NuttX, OFERA project has created.
 - [TCP echo server](#How-to-execute-TCP-Echo-server-example)
 - [MRF24J40-6LowPan through SPI](#How-to-use-MRF24j40-6LowPan)
 - [Micro XRCE-DDS through serial](#How-to-execute-Micro-XRCE-DDS)
-- [microROS demo](#How-to-use-micro-ROS demo)
+- [microROS demo](#How-to-use-micro-ROS-demo)
 - [ADC](#How-to-use-the-ADC-demo)
 - [Telemetry](#How-to-execute-telemetry-app)
 - [Power Manager](#How-to-execute-Power-Manager-example)
@@ -116,6 +116,8 @@ If you don't know which interface is the micro USB, type `dmesg` command at a te
 The NSH is a feature of the RTOS which shows a console through the interface that chooses (UART, USB or Telnet). With this console, you can see execute apps, do file operations, get information about the board. This is a demo to execute the most basic example of NuttX without any extra feature.
 
 ### Olimex-STM32-E407
+This board have the possibility to show the console through the UART or through USB.
+
 Go to the main folder of NuttX and execute the next command to configure the board:
 `./scripts/configure.sh olimex-stm32-e407 nsh_uart`
 
@@ -168,6 +170,8 @@ nsh>
 
 
 ### STM32L1Discovery
+**This board only can show the NSH console throught the UART**
+
 Go to the main folder of NuttX and execute the next command to configure the board:
 `./scripts/configure.sh stm32l1 nsh`
 
@@ -242,9 +246,11 @@ And it should look like this:
 Start the board, find which is the port of the auxiliary serial cable and open a terminal in that port. Init the application `aux_serial <message_to_send>`.
 
 The message will appear in the other terminal and you need to push any key in the terminal to unlock the board console. This image is the board console:
+
 ![image](imgs/aux_board.png)
 
 This image is the auxiliary console:
+
 ![image](imgs/aux_console.png)
 
 ## How to execute BMP180 example
@@ -458,59 +464,7 @@ Temperature: 31 �ºC Humidity: 44
 Temperature: 31 �ºC Humidity: 44
 ```
 
-
-## How to use NSH over UART
-
-
-In the Olimex-STM32-E407 board, we have the chance to use system console through USB or UART. In this guide, we will show how to use the UART port instead of the USB.
-
-First, we need to set the configuration, compile and upload the firmware to the board. So follow the next commands:
-
-`./scripts/configure.sh olimex-stm32-e407 nsh_uart`
-
-Compile:
-`make`
-
-Upload:
-`./scripts/flash.sh olimex-stm32-e407`
-
-At this point, the board is ready to be used, so you need to wire it:
-
-`TTL232 TX` -> `USART3 RX`
-`TTL232 RX` -> `USART3 TX`
-`TTL232 GND` -> `Board GND`
-
-It should look like this:
-
-![img](imgs/olimex_uart.jpg)
-
-Once you finish the wiring, you need to connect the TTL232 to the PC, and using a tool like `minicom`, open the terminal.
-
-```
-NuttShell (NSH)
-nsh> ?
-help usage:  help [-v] [<cmd>]
-
-  [           cmp         false       mkdir       rm          true        
-  ?           dirname     free        mh          rmdir       uname       
-  basename    dd          help        mount       set         umount      
-  break       df          hexdump     mv          sh          unset       
-  cat         echo        kill        mw          sleep       usleep      
-  cd          exec        ls          ps          test        xd          
-  cp          exit        mb          pwd         time        
-
-Builtin Apps:
-  helloxx
-  adc_simple
-  hello
-nsh>
-```
-
-
-
-
-
-## How to execute UDP Echo server example
+## How to execute UDP Echo server example
 
 Go to the main folder of NuttX and type the next command to configure the board:
 `./scripts/configure.sh olimex-stm32-e407 udpecho`
@@ -569,9 +523,11 @@ In this case the IP that was assigned was the 192.168.1.35
 Now if you type something in the computer, the board should echo the same and show the data of the messages, like in the image:
 
 **Computer side**
+
 ![image](imgs/udp_4.jpg)
 
 **Board side**
+
 ![image](imgs/udp_5.jpg)
 
 ## How to execute TCP Echo server example
@@ -656,6 +612,7 @@ If you want to check or modify the connection data, you can do it in the next pa
 `Examples`
 
 And you will see something like this:
+
 ![image](imgs/tcp.jpg)
 
 This shows the IP direction, the netmask and the router IP in hexadecimal format and the port to connect.
@@ -720,6 +677,7 @@ Finally, connect the mini USB cable to the USB OTG1, and the connections should 
 Once the wiring is done, open a console and you should see this:
 
 ![image](imgs/6lowpan_nsh.png)
+
 First we need to type the next command in both boards to bring-down the connection: `ifdown wpan0`
 
 We already know that we have two different roles, **Client** and **Server**. So we need to configure each board with one role:
@@ -741,9 +699,11 @@ Now it's time to configure the client. It's important to follow this configurati
 
 If everything goes fine, you should see something like this:
 **Server Board**
+
 ![image](imgs/6lowpan_accept.png)
 
 **Client Board**
+
 ![image](imgs/6lowpan_assoc.png)
 
 It is only left to bring-up the network, so type this command in both boards: `ifup wpan0`.
@@ -935,17 +895,21 @@ cd ~/agent_ws/install/uros_agent/lib/uros_agent/
 ```
 
 Once you execute it should look like this:
+
 ![image](imgs/microros_agent.png)
 
 Now execute the publisher app in the Olimex board, typing `publisher`, and should send a new value every 100mS. And will look like this:
 
 **Agent**
+
 ![image](imgs/microros_agentattach.png)
 
 **Board publisher**
+
 ![image](imgs/microros_pub.png)
 
 Finally, if you type in a console `ros2 topic list`, you will be able to see the topic like in the image:
+
 ![image](imgs/microros_ros2.png)
 
 ## Run a publisher:
@@ -954,6 +918,7 @@ Finally, if you type in a console `ros2 topic list`, you will be able to see the
 To run this example, you should follow the same steps as in the previous (Run a publisher), instead of run the `publisher` app, you should run `subscriber` app.
 
 If the publisher is running properly, you should see this on the board:
+
 ![image](imgs/microros_sub.png)
 
 So as a summary:
