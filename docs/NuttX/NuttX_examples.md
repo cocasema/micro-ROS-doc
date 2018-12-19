@@ -19,7 +19,7 @@ the defconfig files for NuttX, OFERA project has created.
 - [Power Manager](#How-to-execute-Power-Manager-example)
 - [SD Card](#How-to-use-a-micro-SD-Card-in-the-Olimex-STM32-E407-board)
 - [Micro XRCE-DDS through serial](#How-to-execute-Micro-XRCE-DDS)
-- [microROS demo](#How-to-use-micro-ROS-demo)
+- [micro-ROS demo](#How-to-use-micro-ROS-demo)
 
 
 
@@ -28,8 +28,9 @@ the defconfig files for NuttX, OFERA project has created.
 - [NSH through UART](#How-to-execute-NSH-under-STM32L-Discovery)
 - [BMP180 through I2C](#How-to-execute-BMP180-example)
 - [HIH6130 through I2C](#How-to-execute-HIH6130-example)
-- [Micro XRCE-DDS through serial](#How-to-execute-Micro-XRCE-DDS)
 - [Power Manager](#How-to-execute-Power-Manager-example)
+- [Micro XRCE-DDS through serial](#How-to-execute-Micro-XRCE-DDS)
+
 
 
 # Repositories to be used
@@ -59,8 +60,7 @@ This section provides step-by-step tutorials so you can start executing the exam
 
 ## How to execute NSH over USB under Olimex-STM32-E407
 
-
-The NSH is a feature of the RTOS which shows a console through the interface that chooses (UART, USB or Telnet). With this console, you can see execute apps, do file operations, get information about the board. This is a demo to execute the most basic example of NuttX without any extra feature.
+NSH is a system console that can be use throught the next interfaces: USB,UART and Telnet. With this console you can execute apps, set system configuration and see the state of the system.
 
 Go to the main folder of NuttX and execute the next command to configure the board:
 `./scripts/configure.sh olimex-stm32-e407 nsh`
@@ -113,7 +113,6 @@ If you don't know which interface is the micro USB, type `dmesg` command at a te
 
 ## How to execute NSH with the UART.
 
-The NSH is a feature of the RTOS which shows a console through the interface that chooses (UART, USB or Telnet). With this console, you can see execute apps, do file operations, get information about the board. This is a demo to execute the most basic example of NuttX without any extra feature.
 
 ### Olimex-STM32-E407
 This board have the possibility to show the console through the UART or through USB.
