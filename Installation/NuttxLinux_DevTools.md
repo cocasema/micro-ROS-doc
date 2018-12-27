@@ -4,13 +4,13 @@
 
 ### ROS2 development tools
 
-Follow the steps to install ROS2 development tools located in the [Developmet tools installation for Linux](Linux_DevTools.md) section.
+Follow the steps to install ROS2 development tools located in the [Development tools installation for Linux](Linux_DevTools.md) section.
 
 ### Nuttx development tools
 
 To setup a Nuttx develop environment execute the below commands. 
 
-1. **Install essential required for Nuttx complilation**
+1. **Install essential required for Nuttx compilation**
 
     ```bash
     apt install -y  bison \

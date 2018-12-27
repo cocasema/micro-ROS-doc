@@ -38,7 +38,7 @@
 
 1. **Build Nuttx binary**
 
-    Build the binary file that is going to be flashed on the microcontroller board
+    Build the binary file that is going to be flashed on the micro-controller board
 
     ```bash
         (cd ~/nuttx && tools/configure.sh ../apps/configs/olimex-stm32-e407/uros/)
@@ -59,7 +59,7 @@
     Read [stm32-e407 board manual](https://www.olimex.com/Products/ARM/ST/STM32-E407/resources/STM32-E407.pdf) to have more detailed information about the flashing process.
 
     >**Note:** After the stdout: "wrote *X* bytes from file nuttx.bin in *X*s (*X* KiB/s)" is shown, a debugger server is started.
-    The Debugger server is not necesay so you may close it (press ctrl + c).
+    The Debugger server is not necessary so you may close it (press ctrl + c).
 
 ## Notes
 
@@ -79,7 +79,7 @@ A discrimination of the usage of the workaround is still to be done. This should
 ## SVD files
 
 Some debuggers interfaces could benefit from the usage of SVD files.
-Files are chip dependant and you can find yours in:
+Files are chip dependent and you can find yours in:
 http://www.keil.com/dd2/stmicroelectronics/stm32f407zgtx/eula-container
 
 If you download the "Device Family Pack" and open it as an archive you could find the SVD files of the family of chips along with other helpful files like drivers and multiple examples of using the board.

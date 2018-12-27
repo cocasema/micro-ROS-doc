@@ -81,7 +81,7 @@
         libtinyxml2-dev
     ```
 
-1. **Install miscellanius required apt packages for ROS2 last release repos**
+1. **Install miscellaneous required apt packages for ROS2 last release repos**
     ```
     apt install -y  libpcre3 \
                     libpcre3-dev \

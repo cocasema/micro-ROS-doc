@@ -1,8 +1,8 @@
-# Developmet tools installation
+﻿# Development tools installation
 
 This section will provide all steps of how install all required development tools for building a MicroROS workspace.
 The development tools for Micro-ROS in Linux platforms is the same as the one for [ROS2](https://github.com/ros2/ros2/wiki), so the same set-up is needed.
-All required tool that is going to be intalled are been extracted from the [ROS2 istallation guide](https://index.ros.org/doc/ros2/Linux-Install-Debians/).
+All required tool that is going to be installed are been extracted from the [ROS2 istallation guide](https://index.ros.org/doc/ros2/Linux-Install-Debians/).
 
 1. [Windows platform](Windows_DevTools.md)
 1. [Linux platform](Linux_DevTools.md)
