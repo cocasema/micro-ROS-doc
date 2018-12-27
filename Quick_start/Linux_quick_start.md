@@ -1,4 +1,4 @@
-# Linux quick start
+﻿# Linux quick start
 
 All steps are executed in a Linux terminal.
 
@@ -67,7 +67,7 @@ All steps are executed in a Linux terminal.
     ./string_publisher_c
     ```
 
-1. **Open new terminar in the running client-side docker container**
+1. **Open new terminal in the running client-side docker container**
 
     ```shell
     sudo docker  exec -it client_docker bash

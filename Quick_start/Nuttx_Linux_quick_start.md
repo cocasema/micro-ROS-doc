@@ -1,4 +1,4 @@
-# Nuttx (Linux) quick start
+﻿# Nuttx (Linux) quick start
 
 For this quick start an example of how a publisher Micro node running in an olimex may communicate with a Micro node running on a linux host.
 
@@ -23,7 +23,7 @@ For this quick start an example of how a publisher Micro node running in an olim
 
     > **Note:** For this step you are going to need plugged the [USB-serial converter device](https://www.olimex.com/Products/Components/Cables/USB-Serial-Cable/USB-Serial-Cable-F/).
 
-    > **Important:** Unplug and plug the mini-USB conector device before execute this step.
+    > **Important:** Unplug and plug the mini-USB connector device before execute this step.
 
     > **Note:** For this step superuser privileges are required.
 
@@ -82,11 +82,11 @@ For this quick start an example of how a publisher Micro node running in an olim
     ```shell
     (cd ~/nuttx && openocd -f interface/ftdi/olimex-arm-usb-tiny-h.cfg -f target/stm32f4x.cfg -c init -c "reset halt" -c "flash write_image erase nuttx.bin 0x08000000")
     ```
-    >**Note:** You may have to hold press the reset button for a little while in order to start the board bootloader and make possible the flash process. 
+    >**Note:** You may have to hold press the reset button for a little while in order to start the board boot-loader and make possible the flash process. 
     Read [stm32-e407 board manual](https://www.olimex.com/Products/ARM/ST/STM32-E407/resources/STM32-E407.pdf) to have more detailed information about the flashing process.
     
     >**Note:** After you get the output: "wrote *X* bytes from file nuttx.bin in *X*s (*X* KiB/s)", a debugger server is started. 
-    The Debugger server is not necesay so you may close it (press ctrl + c).
+    The Debugger server is not necessary so you may close it (press ctrl + c).
 
 1. **Open serial communication terminal and start publisher example**
 
@@ -97,7 +97,7 @@ For this quick start an example of how a publisher Micro node running in an olim
     ```shell
     nsh> publisher
     ```
-    >**Important:** Unplug and plug the mini-USB conector device before execute this step.
+    >**Important:** Unplug and plug the mini-USB connector device before execute this step.
 
     >**Note:** To exit minicom press "ctrl + a" release them and press "x"
 
