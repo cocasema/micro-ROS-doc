@@ -82,5 +82,5 @@ All steps are executed in a Windows cmd terminal.
     ```
 
 
-After this steps you will see how publisher and subscriber share messages.
+After these steps, you will see how the publisher and the subscriber share messages.
 You may open as many publisher or/and subscriber as you want.
