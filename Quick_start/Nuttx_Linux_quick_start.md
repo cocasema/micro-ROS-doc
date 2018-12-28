@@ -27,7 +27,7 @@ In this quick start guide, an example of a micro-ROS node publisher running in a
 
     > **Note:** For this step superuser privileges are required.
 
-    > **Note:** After execute these steps you will need to leave the terminal opened and open a new one for the below steps.
+    > **Note:** After executing these steps you will need to leave the terminal opened and open a new one for the below steps.
 
 1. **Run 'ROS2  - Quick start Agent' docker container and execute Micro-ROS Agent for a udp transport**
 
