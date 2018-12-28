@@ -4,9 +4,10 @@
 
 # Overview 
 
-[micro-ROS](https://microros.github.io/micro-ROS/) is a project that aims to puts ROS2 onto microcontrollers, making them first-class participants of the ROS 2 environment. 
-This documentation is meant to help a developer to use micro-ROS. 
-It will describe all the functionalities of the different packages that make it up.
+[micro-ROS](https://microros.github.io/micro-ROS/) is a project that aims to put ROS2 into microcontrollers, making them first-class participants of the ROS 2 environment. 
+This documentation is a guide for the developer on the use micro-ROS. 
+It will describe all the functionalities of the different packages that micro-ROS is build on.
+
 
 1. [Installation](Installation/README.md)
 1. [Quick start](Quick_start/README.md)
