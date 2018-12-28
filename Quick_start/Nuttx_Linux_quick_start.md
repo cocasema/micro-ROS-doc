@@ -97,7 +97,7 @@ For this quick start an example of how a publisher Micro node running in an olim
     ```shell
     nsh> publisher
     ```
-    >**Important:** Unplug and plug the mini-USB connector device before execute this step.
+    >**Important:** Unplug and plug the mini-USB connector device before executing this step.
 
     >**Note:** To exit minicom press "ctrl + a" release them and press "x"
 
