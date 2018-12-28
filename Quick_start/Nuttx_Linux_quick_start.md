@@ -57,7 +57,7 @@ In this quick start guide, an example of a micro-ROS node publisher running in a
     int32_subscriber_c
     ```
 
-     > **Note:** After execute these steps you will need to leave the terminal opened and open a new one for the below steps.
+     > **Note:** After executing these steps you will need to leave the terminal opened and open a new one for the following steps.
 
 ## Micro-ROS Client (Nuttx side)
 
