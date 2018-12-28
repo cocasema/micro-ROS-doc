@@ -1,0 +1,26 @@
+@startuml
+
+:main();
+:Create node;
+:Create altitude subscription; 
+:Create inc power publisher;
+:Create status publisher;  
+:rclcpp_spin;
+
+stop
+
+
+:Altitude_callback();
+if (Altitude <= 500 [m]) then (yes)
+    :Publish failure status;
+    :Publish engine power +10 [Watt]
+elseif (Altitude <= 1000 [m]) then (yes)
+    :Publish warning status;
+    :Publish engine power +10 [Watt]
+else (nothing)
+    :Publish Ok status;
+endif
+
+stop
+
+@enduml
