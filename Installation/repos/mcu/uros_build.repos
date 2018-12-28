@@ -3,7 +3,7 @@ repositories:
   ament/ament_cmake:
     type: git
     url: https://github.com/ament/ament_cmake.git
-    version: 0.5.1
+    version: 0.6.0
   ament/ament_index:
     type: git
     url: https://github.com/ament/ament_index.git
@@ -11,11 +11,11 @@ repositories:
   ament/ament_lint:
     type: git
     url: https://github.com/ament/ament_lint.git
-    version: 0.5.2
+    version: 0.6.2
   ament/ament_package:
     type: git
     url: https://github.com/ament/ament_package.git
-    version: 0.5.2
+    version: 0.6.0
   ament/ament_tools:
     type: git
     url: https://github.com/ament/ament_tools.git
@@ -23,7 +23,7 @@ repositories:
   ament/osrf_pycommon:
     type: git
     url: https://github.com/osrf/osrf_pycommon.git
-    version: 0.1.5
+    version: 0.1.6
   ament/uncrustify:
     type: git
     url: https://github.com/ament/uncrustify.git
