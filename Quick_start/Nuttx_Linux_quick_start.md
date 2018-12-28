@@ -50,7 +50,7 @@ In this quick start guide, an example of a micro-ROS node publisher running in a
 
     > **Note:** For this step superuser privileges are required.
 
-1. **Run 'ROS2  - Quick start Client' docker container and run an Subscriber**
+1. **Run 'ROS2  - Quick start Client' docker container and run a Subscriber**
 
     ```shell
     sudo docker run -it --rm --net=host ros2_quickstart_client
