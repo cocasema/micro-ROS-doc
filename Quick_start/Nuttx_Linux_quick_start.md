@@ -75,7 +75,7 @@ In this quick start guide, an example of a micro-ROS node publisher running in a
     ```
      >**Note:** For this step superuser privileges are required.*
 
-1. **Flash binary file into olimex board**
+1. **Flash binary file into Olimex board**
 
     To write the created binary into the [stm32-e407 board](https://www.olimex.com/Products/ARM/ST/STM32-E407/open-source-hardware) connect the [JTAG ARM-USB-TINY-H](https://www.olimex.com/Products/ARM/JTAG/ARM-USB-TINY-H/) with the board and the pc and execute the below command.
 
