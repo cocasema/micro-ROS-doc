@@ -23,7 +23,7 @@ For this quick start an example of how a publisher Micro node running in an olim
 
     > **Note:** For this step you are going to need to plug the [USB-serial converter device](https://www.olimex.com/Products/Components/Cables/USB-Serial-Cable/USB-Serial-Cable-F/).
 
-    > **Important:** Unplug and plug the mini-USB connector device before execute this step.
+    > **Important:** Unplug and plug the mini-USB connector device before executing this step.
 
     > **Note:** For this step superuser privileges are required.
 
