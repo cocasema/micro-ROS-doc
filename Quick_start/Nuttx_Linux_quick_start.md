@@ -1,6 +1,6 @@
 ﻿# Nuttx (Linux) quick start
 
-For this quick start an example of how a publisher Micro node running in an olimex may communicate with a Micro node running on a linux host.
+In this quick start guide, an example of a micro-ROS node publisher running in an Olimex may communicate with a micro-ROS node subscriber running on a Linux host.
 
 ## Micro-ROS Agent (Linux side)
 
