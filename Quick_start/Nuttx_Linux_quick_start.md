@@ -101,4 +101,4 @@ For this quick start an example of how a publisher Micro node running in an olim
 
     >**Note:** To exit minicom press "ctrl + a" release them and press "x"
 
-After this steps you will see how publisher (running in Olimex board) and subscriber (running in the Linux system) share messages.
+After these steps, you will see how the publisher (running in Olimex board) and the subscriber (running in the Linux system) share messages.
