@@ -86,7 +86,7 @@ For this quick start an example of how a publisher Micro node running in an olim
     Read [stm32-e407 board manual](https://www.olimex.com/Products/ARM/ST/STM32-E407/resources/STM32-E407.pdf) to have more detailed information about the flashing process.
     
     >**Note:** After you get the output: "wrote *X* bytes from file nuttx.bin in *X*s (*X* KiB/s)", a debugger server is started. 
-    The Debugger server is not necessary so you may close it (press ctrl + c).
+    The Debugger server is not necessary, so you may close it (press ctrl + c).
 
 1. **Open serial communication terminal and start publisher example**
 
