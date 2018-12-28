@@ -27,6 +27,8 @@ micro-ROS is composed by multiple repositories:
     micro-ROS applications to be used along with NuttX.
 * [docker](https://github.com/microROS/docker):
     Docker-related material to set up, configure and develop with micro-ROS hardware.
+* [HRIM](https://github.com/microROS/HRIM):
+    An information model for robot hardware. Facilitates interoperability across manufacturers.
 
 ## Documentation
 
