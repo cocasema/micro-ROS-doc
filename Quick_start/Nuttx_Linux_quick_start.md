@@ -21,7 +21,7 @@ For this quick start an example of how a publisher Micro node running in an olim
     (LAST_PLUGGED_DEV=$(dmesg | grep "converter now attached" | tail -c 8) && uros_agent serial /dev/$LAST_PLUGGED_DEV)
     ```
 
-    > **Note:** For this step you are going to need plugged the [USB-serial converter device](https://www.olimex.com/Products/Components/Cables/USB-Serial-Cable/USB-Serial-Cable-F/).
+    > **Note:** For this step you are going to need to plug the [USB-serial converter device](https://www.olimex.com/Products/Components/Cables/USB-Serial-Cable/USB-Serial-Cable-F/).
 
     > **Important:** Unplug and plug the mini-USB connector device before execute this step.
 
