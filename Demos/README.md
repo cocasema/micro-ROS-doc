@@ -60,7 +60,7 @@ This purpose of this demonstration is to show how Micro-ROS stack can be used in
 In this demonstration, an altitude control system is simulated.
 The demo will show how can Micro-ROS nodes communicate with ROS2 nodes.
 
-<p align="Center"><img  src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/microROS/micro-ROS-doc/feature/MicroROSHomeDoc/Demos/Diagrams/ComunicationDiagram.plantuml"></p>
+<p align="Center"><img  src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/microROS/micro-ROS-doc/develop/Demos/Diagrams/ComunicationDiagram.plantuml"></p>
 <p align="Center" style="font-size:200%;color:grey;">Communication diagram<p>
 
 ### Nodes descriptions
@@ -75,7 +75,7 @@ The node is built using the Micro-ROS middleware packages (rmw_micro_xrcedds and
 It is meant to be running in a microcontroller processor, but for this demonstration, the node runs on the host PC.
 The node is connected to the DDS world through a Micro XRCE-DDS Agent.
 
-<p align="Center"><img  src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/microROS/micro-ROS-doc/feature/MicroROSHomeDoc/Demos/Diagrams/ActuatorNodeDiagram.plantuml"></p>
+<p align="Center"><img  src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/microROS/micro-ROS-doc/develop/Demos/Diagrams/ActuatorNodeDiagram.plantuml"></p>
 <p align="Center" style="font-size:200%;color:grey;">Node workflow<p>
 
 #### rad0_altitude_sensor
@@ -88,7 +88,7 @@ The node is built using the Micro-ROS middleware packages (rmw_micro_xrcedds and
 It is meant to be running in a microcontroller processor, but for this demonstration, the node runs on the host PC.
 The node is connected to the DDS world through a Micro XRCE-DDS Agent.
 
-<p align="Center"><img  src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/microROS/micro-ROS-doc/feature/MicroROSHomeDoc/Demos/Diagrams/AltitudeSensorNodeDiagram.plantuml"></p>
+<p align="Center"><img  src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/microROS/micro-ROS-doc/develop/Demos/Diagrams/AltitudeSensorNodeDiagram.plantuml"></p>
 <p align="Center" style="font-size:200%;color:grey;">Node workflow<p>
   
 
@@ -102,7 +102,7 @@ The node is built using the ROS2 middleware packages (rmw_fastrtps and rosidl_ty
 
 It is meant to be running in on a regular PC, and it is directly connected to the DDS world.
 
-<p align="Center"><img  src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/microROS/micro-ROS-doc/feature/MicroROSHomeDoc/Demos/Diagrams/ControlCoreDiagram.plantuml"></p>
+<p align="Center"><img  src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/microROS/micro-ROS-doc/develop/Demos/Diagrams/ControlCoreDiagram.plantuml"></p>
 <p align="Center" style="font-size:200%;color:grey;">Node workflow<p>
 
 #### rad0_display
@@ -115,7 +115,7 @@ The node is built using the Micro-ROS middleware packages (rmw_micro_xrcedds and
 It is meant to be running in a microcontroller processor, but for this demonstration, the node runs on the host PC.
 The node is connected to the DDS world through a Micro XRCE-DDS Agent.
 
-<p align="center"><img  src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/microROS/micro-ROS-doc/feature/MicroROSHomeDoc/Demos/Diagrams/DisplayNodeDiagram.plantuml"></p>
+<p align="center"><img  src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/microROS/micro-ROS-doc/develop/Demos/Diagrams/DisplayNodeDiagram.plantuml"></p>
 <p align="Center" style="font-size:200%;color:grey;">Node workflow<p>
 
 
@@ -124,5 +124,5 @@ The node is connected to the DDS world through a Micro XRCE-DDS Agent.
 1. [Linux](Linux_demo_run_commands.md#real-application-demonstration)
 1. [Windows](Windows_demo_run_commands.md#real-application-demonstration)
 
-<p align="center"><img  src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/microROS/micro-ROS-doc/feature/MicroROSHomeDoc/Demos/Diagrams/Demo_SecuenceDiagram.plantuml"></p>
+<p align="center"><img  src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/microROS/micro-ROS-doc/develop/Demos/Diagrams/Demo_SecuenceDiagram.plantuml"></p>
 <p align="Center" style="font-size:200%;color:grey;">Communication sequence diagram<p>
