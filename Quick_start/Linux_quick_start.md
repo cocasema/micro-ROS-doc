@@ -81,5 +81,5 @@ All steps are executed in a Linux terminal.
     ./string_subscriber_c
     ```
 
-After this steps you will see how publisher and subscriber share messages.
+After these steps, you will see how publisher and subscriber share messages.
 You may open as many publisher or/and subscriber as you want.
