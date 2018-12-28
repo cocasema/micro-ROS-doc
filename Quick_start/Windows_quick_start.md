@@ -68,7 +68,7 @@ All steps are executed in a Windows cmd terminal.
     string_publisher_c.exe
     ```
 
-1. **Open new terminar in the running client-side docker container**
+1. **Open a new terminal in the running client-side docker container**
 
     ```cmd
     sudo docker  exec -it client_docker bash
