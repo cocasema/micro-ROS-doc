@@ -130,7 +130,7 @@ repositories:
     type: git
     url: https://github.com/eProsima/Micro-XRCE-DDS-Agent.git
     # Change2Tag
-    version: feature/fastRTPS1.7.0
+    version: master 
 
 # MicroROS
 
