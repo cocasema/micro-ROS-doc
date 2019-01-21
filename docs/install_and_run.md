@@ -136,9 +136,9 @@ From now on we can run our [sample nodes](https://github.com/microROS/micro-ROS-
 
 ## Linux
 
-### Step 1: Set-up ROS2 environment on Windows
+### Step 1: Set-up ROS2 environment on Linux
 
-The development environment for micro-ROS in Windows platforms is the same as the one for [ROS2](https://github.com/ros2/ros2/wiki), so the same set-up is needed.
+The development environment for micro-ROS in Linux platforms is the same as the one for [ROS2](https://github.com/ros2/ros2/wiki), so the same set-up is needed.
 You can follow the [ROS2 installation guide for Linux.](https://index.ros.org/doc/ros2/Linux-Install-Debians/)
 
 #### Alternative: using docker container
@@ -223,7 +223,7 @@ colcon build --cmake-args -DBUILD_SHARED_LIBS=ON
 ```
 
 
-### Step 5: Configure execution environment on Windows
+### Step 5: Configure execution environment on Linux
 
 Once colcon has finished building micro-ROS, you need to set up the environment, so it finds all the required .os to run applications.
 For doing so, colcon has copied for us the following batch files.
